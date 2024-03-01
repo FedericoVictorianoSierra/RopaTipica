@@ -192,12 +192,12 @@ if (isset($_SESSION['idusuario'])) {
 
 
 <!--  Banner de Cookies  -->
-<div id="cookie-banner" class="hidden">
+<!--<div id="cookie-banner" class="hidden">
     <div class="banner-content">
         <p>Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al continuar navegando, aceptas el uso de cookies.</p>
         <button onclick="acceptCookies()">Aceptar cookies</button>
     </div>
-</div>
+</div> -->
 <!--- Fin banner de cookies -->
 
 
