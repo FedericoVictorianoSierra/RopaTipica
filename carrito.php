@@ -130,15 +130,9 @@ while ($resultado = mysqli_fetch_array($registros)) {
 
                     <tr>
                         <td>
-                            <!-- Mostrar el Subtotal -->
-                            <p>SubTotal: $<?php echo $total; ?></p>
+                            <!-- Mostrar el Total -->
+                            <p>Total: $<?php echo $total; ?></p>
                             <?php
-                            $iva = $total * $ivas;
-                            $totaliva = $total + $iva;
-                            echo "Iva (16%): ";
-                            echo "<br>";
-                            echo "<br>";
-                            echo "Total: $" . $totaliva;
                             ?>
                         </td>
 
@@ -156,7 +150,6 @@ while ($resultado = mysqli_fetch_array($registros)) {
 
                     // Insertar cada carrito  en la tabla "venta"
                     foreach ($datos as $datos1) {
-                        $ivas = 0.16; // Establecer el valor del impuesto IVA
 
                         $sql = "SELECT * FROM articulo WHERE idarticulo = " . $datos1['idarticulo'];
                         $resultado = mysqli_query($conexion, $sql);
