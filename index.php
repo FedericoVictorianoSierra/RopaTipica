@@ -202,30 +202,6 @@ if (isset($_SESSION['idusuario'])) {
 <!--- Fin banner de cookies -->
 
 
-<!-- Query para aceptar cookies-->
-<?php
-// Comprobar si el usuario ya dio su consentimiento para las cookies
-if (!isset($_COOKIE['cookie_consent'])) {
-    // Si no hay consentimiento, mostrar el banner
-    echo '<div id="cookie-banner">';
-    echo 'Este sitio web utiliza cookies para mejorar la experiencia del usuario. Al continuar navegando, aceptas el uso de cookies.';
-    echo '<button onclick="acceptCookies()">Aceptar cookies</button>';
-    echo '</div>';
-}
-
-// Función para establecer una cookie de consentimiento cuando el usuario acepta las cookies
-echo '<script>';
-echo 'function acceptCookies() {';
-echo 'document.getElementById("cookie-banner").style.display = "none";'; // Ocultar el banner
-echo 'document.cookie = "cookie_consent=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";'; // Establecer la cookie de consentimiento
-echo '}';
-echo '</script>';
-?>
-<!-- Fin de Query -->
-
-
-
-
 
     <!-- Footer Start -->
     <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
@@ -296,4 +272,5 @@ echo '</script>';
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="js/cookies.js"></script>
 </body>
