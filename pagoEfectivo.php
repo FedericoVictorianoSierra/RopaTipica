@@ -1,27 +1,28 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="css/pagoEfectivo.css" media="all" rel="stylesheet" type="text/css">
+</head>
 
-    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link href="css/pagoEfectivo.css" media="all" rel="stylesheet" type="text/css">
-	</head>
-	<body>
-		<div class="opps">
+<body>
+	<div class="opps">
 
-        <div class="opps-header">
-            
-				<div class="opps-info">
-                    <h3>Lista de Compras:</h3>
+		<div class="opps-header">
 
-                    <ol>
-                        <h3>Corsair Mouse</h3>
-                        <p>Gaming mouse with shiny lights</p>
-                        <img src="./img/oxxopay_brand.png" alt="OXXOPay">
-                        <p>$200 (50% discount)</p><br>
+			<div class="opps-info">
+				<h3>Lista de Compras:</h3>
 
-                        <h3>Gaming keyboard</h3>
-                        <p>Look mommmy, it has colors!</p>
-                        <img src="./img/oxxopay_brand.png" alt="OXXOPay">
-                        <p>$200 (50% discount)</p><br>
-                    </ol>
-				</div>
+				<ol>
+					<h3>Corsair Mouse</h3>
+					<p>Gaming mouse with shiny lights</p>
+					<img src="./img/oxxopay_brand.png" alt="OXXOPay">
+					<p>$200 (50% discount)</p><br>
+
+					<h3>Gaming keyboard</h3>
+					<p>Look mommmy, it has colors!</p>
+					<img src="./img/oxxopay_brand.png" alt="OXXOPay">
+					<p>$200 (50% discount)</p><br>
+				</ol>
+			</div>
 
 			<div class="opps-header">
 				<div class="opps-reminder">Ficha digital. No es necesario imprimir.</div>
@@ -49,7 +50,7 @@
 				</ol>
 				<div class="opps-footnote">Al completar estos pasos recibirás un correo de <strong>Nombre del negocio</strong> confirmando tu pago.</div>
 			</div>
-		</div>	
-	
+		</div>
+
 
 </body>

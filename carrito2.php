@@ -18,15 +18,15 @@ $conexion = conexion(); // Crear la conexión a la base de datos
 // Obtener los registros del carrito del usuario
 $registros = mysqli_query($conexion, "SELECT * FROM carrito WHERE idusuario = $idusuario");
 while ($resultado = mysqli_fetch_array($registros)) {
-    // Obtener el carrito activo del usuario
-    $carrito_id = $resultado['idcarrito'];
-    $sqlv = "SELECT * FROM carrito WHERE idcarrito = $carrito_id AND activo = 1";
-    $resultadov = mysqli_query($conexion, $sqlv);
-
-    // Verificar si el carrito está activo
-    if (mysqli_num_rows($resultadov) > 0) {
-        $datos[] = $resultado; // Almacenar los registros en la variable global $datos
-    }
+     // Obtener el carrito activo del usuario
+     $carrito_id = $resultado['idcarrito'];
+     $sqlv = "SELECT * FROM carrito WHERE idcarrito = $carrito_id AND activo = 1";
+     $resultadov = mysqli_query($conexion, $sqlv);
+     
+     // Verificar si el carrito está activo
+     if (mysqli_num_rows($resultadov) > 0) {
+         $datos[] = $resultado; // Almacenar los registros en la variable global $datos
+     }
 }
 
 ?>
@@ -138,12 +138,60 @@ while ($resultado = mysqli_fetch_array($registros)) {
 
                     </tr>
                 </table>
+                <?php
+                if (isset($_POST['accion']) && $_POST['accion'] == 'comprar') {
+                    // Obtener la fecha actual
+                    date_default_timezone_set('America/Mexico_City');
+                    $fecha = date('Y-m-d H:i:s');
+
+                    // Modificar la estructura de la tabla "venta" para permitir valores nulos en la columna idcarrito
+                    //$sql_alter_table = "ALTER TABLE venta MODIFY COLUMN idcarrito INT NULL";
+                    //mysqli_query($conexion, $sql_alter_table);
+
+                    // Insertar cada carrito  en la tabla "venta"
+                    foreach ($datos as $datos1) {
+
+                        $sql = "SELECT * FROM articulo WHERE idarticulo = " . $datos1['idarticulo'];
+                        $resultado = mysqli_query($conexion, $sql);
+                        $articulo = mysqli_fetch_assoc($resultado);
+                        $precio_total = $articulo['precio_venta'] * $datos1['cantidad'];
+
+                        $sql_detalle_venta = "INSERT INTO venta(idusuario, fecha, impuesto, total, idcarrito) VALUES ('{$datos1['idusuario']}', '{$fecha}', '{$ivas}', '{$precio_total}', '{$datos1['idcarrito']}')";
+                        //$sql_detalle_venta = "INSERT INTO venta(idusuario, fecha, impuesto, total) VALUES ('{$datos1['idusuario']}', '{$fecha}', '{$ivas}', '{$precio_total}')";
+
+                        mysqli_query($conexion, $sql_detalle_venta);
+
+                        if ($articulo['existencia'] > 0 && $datos1['cantidad'] <= $articulo['existencia']) {
+                            // Actualizar la existencia del artículo en la tabla "articulo"
+                            $nueva_cantidad = $articulo['existencia'] - $datos1['cantidad'];
+                            $sql_actualizar_cantidad = "UPDATE articulo SET existencia = $nueva_cantidad WHERE idarticulo = {$datos1['idarticulo']}";
+                            mysqli_query($conexion, $sql_actualizar_cantidad);
+                        } else {
+                            echo "<script>alert('No hay articulos sufucientes ');</script>";
+                        }
+                    }
+
+                    // Eliminar los registros del carrito
+                    foreach ($datos as $datos1) {
+                        $sqlx = "UPDATE carrito SET activo='0' WHERE idcarrito = {$datos1['idcarrito']}";
+                        //$sqlx = "DELETE FROM carrito WHERE idcarrito = {$datos1['idcarrito']}";
+                        mysqli_query($conexion, $sqlx);
+                    }
+
+                    // Redirigir al usuario a una página de confirmación de compra
+                    $textoModal = "Compra Exitosa";
+                    $mostrarModal = true;
+                    $nombreArchivo = "compras.php";
+                    //exit;
+                }
+
+                ?>
+
                 <!-- Enviar a la forma de pago -->
-                <form action="pagoTarjeta.php" method="post" class="alineacion">
-                    <input type="hidden" name="accion">
+                <form action="" method="post" class="alineacion">
+                    <input type="hidden" name="accion" value="comprar">
                     <button class="btn btn-secondary font-weight-bold py-2 px-4 mt-2" type="submit">Comprar</button>
                 </form>
-
 
             <?php } ?>
         </div>
@@ -164,4 +212,5 @@ while ($resultado = mysqli_fetch_array($registros)) {
 <br>
 <br>
 <br>
+<?php include_once "ventana.php" ?>
 <?php include_once "pie.php" ?>

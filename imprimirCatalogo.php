@@ -34,13 +34,15 @@ $result_articulos = mysqli_query($conexion, $sql_articulos);
 
     td.producto,
     th.producto {
-        width: 75px; /* Ancho de la columna producto */
+        width: 75px;
+        /* Ancho de la columna producto */
         max-width: 75px;
     }
 
     td.precio,
     th.precio {
-        width: 100px; /* Ancho de la columna precio */
+        width: 100px;
+        /* Ancho de la columna precio */
         max-width: 100px;
         word-break: break-all;
         text-align: center;
@@ -48,7 +50,8 @@ $result_articulos = mysqli_query($conexion, $sql_articulos);
 
     td.codigo,
     th.codigo {
-        width: 100px; /* Ancho de la columna codigo */
+        width: 100px;
+        /* Ancho de la columna codigo */
         max-width: 100px;
         word-break: break-all;
         text-align: center;
@@ -56,7 +59,8 @@ $result_articulos = mysqli_query($conexion, $sql_articulos);
 
     td.nombre,
     th.nombre {
-        width: 100px; /* Ancho de la columna nombre */
+        width: 100px;
+        /* Ancho de la columna nombre */
         max-width: 100px;
         word-break: break-all;
         text-align: right;
@@ -92,10 +96,10 @@ $result_articulos = mysqli_query($conexion, $sql_articulos);
     <!-- Encabezado donde se muetra la categoria del catalogo-->
     <h1 class="centrado">Catálogo de <?php echo $row_categoria['nombre']; ?></h1>
     <table>
-    <thead>
+        <thead>
             <!-- Encabezados de las columnas -->
             <tr>
-                <th class="cantidad">CODIGO</th> 
+                <th class="cantidad">CODIGO</th>
                 <th class="cantidad">NOMBRE</th>
                 <th class="precio">PRECIO VENTA</th>
                 <th class="precio">EXISTENCIA</th>
@@ -106,28 +110,28 @@ $result_articulos = mysqli_query($conexion, $sql_articulos);
         </thead>
         <tbody>
 
-        <?php
-        // Iterar sobre los artículos de la categoría y mostrarlos en tarjetas
-        while ($row_articulo = mysqli_fetch_assoc($result_articulos)) {
-        ?>
-            <!-- Filas de la tabla para cada articulo -->
-            <tr>
-                <td class="codigo"><?php echo $row_articulo['codigo']; ?></td>
-                <td class="nombre"><?php echo $row_articulo['nombre']; ?></td>
-                <td class="precio"><?php echo $row_articulo['precio_venta']; ?> <strong></strong></td>
-                <td class="precio"><?php echo $row_articulo['existencia']; ?></td>
-                <td class="nombre"><?php echo $row_articulo['descripcion']; ?></td>
-                <td class="precio"><?php echo $row_articulo['talla']; ?></td>
-                <td class="precio"><?php echo $row_articulo['modelo']; ?></td>
-            </tr>   
-        <?php
-        }
-        ?>
+            <?php
+            // Iterar sobre los artículos de la categoría y mostrarlos en tarjetas
+            while ($row_articulo = mysqli_fetch_assoc($result_articulos)) {
+            ?>
+                <!-- Filas de la tabla para cada articulo -->
+                <tr>
+                    <td class="codigo"><?php echo $row_articulo['codigo']; ?></td>
+                    <td class="nombre"><?php echo $row_articulo['nombre']; ?></td>
+                    <td class="precio"><?php echo $row_articulo['precio_venta']; ?> <strong></strong></td>
+                    <td class="precio"><?php echo $row_articulo['existencia']; ?></td>
+                    <td class="nombre"><?php echo $row_articulo['descripcion']; ?></td>
+                    <td class="precio"><?php echo $row_articulo['talla']; ?></td>
+                    <td class="precio"><?php echo $row_articulo['modelo']; ?></td>
+                </tr>
+            <?php
+            }
+            ?>
         </tbody>
     </table>
     <h1 class="centrado">Contáctanos al 9532100526</h1>
     <h1 class="centrado">Colonia Centro, Heroica Ciudad de Tlaxiaco, Oax </h1>
-    </div>
+</div>
 </div>
 
 <script>

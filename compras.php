@@ -98,6 +98,9 @@ $result = mysqli_query($conexion, $sql); // Ejecuta la consulta y guarda el resu
     </div>
 </div>
 
+
+<?php include_once "ventana.php" ?>
+
 <script src="js/jquery.min.js"></script>
 
 <?php include_once "pie.php" ?> <!-- Incluye el pie de página -->
