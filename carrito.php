@@ -187,6 +187,7 @@ while ($resultado = mysqli_fetch_array($registros)) {
 
                 ?>
 
+                <!-- Enviar a la forma de pago -->
                 <form action="" method="post" class="alineacion">
                     <input type="hidden" name="accion" value="comprar">
                     <button class="btn btn-secondary font-weight-bold py-2 px-4 mt-2" type="submit">Comprar</button>

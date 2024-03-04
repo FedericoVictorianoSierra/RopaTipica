@@ -125,6 +125,8 @@ $result_articulos = mysqli_query($conexion, $sql_articulos);
         ?>
         </tbody>
     </table>
+    <h1 class="centrado">Contáctanos al 9532100526</h1>
+    <h1 class="centrado">Colonia Centro, Heroica Ciudad de Tlaxiaco, Oax </h1>
     </div>
 </div>
 
