@@ -41,6 +41,7 @@ if (isset($_SESSION['idusuario'])) {
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.min.css" rel="stylesheet">
+    <link href = "css/cookies.css" rel = "stylesheet">
 </head>
 
 <body>
