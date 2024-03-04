@@ -8,4 +8,5 @@ document.addEventListener("DOMContentLoaded", function() {
 function acceptCookies() {
     document.getElementById("cookie-banner").classList.add("hidden");
     // Establecer la cookie de consentimiento aquí
+    document.cookie = "cookie_consent=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
 }
