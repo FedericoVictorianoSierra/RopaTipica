@@ -139,7 +139,7 @@ while ($resultado = mysqli_fetch_array($registros)) {
                     </tr>
                 </table>
                 <!-- Enviar a la forma de pago -->
-                <form action="pagoTarjeta.php" method="post" class="alineacion">
+                <form action="pago.php" method="post" class="alineacion">
                     <input type="hidden" name="accion">
                     <button class="btn btn-secondary font-weight-bold py-2 px-4 mt-2" type="submit">Comprar</button>
                 </form>

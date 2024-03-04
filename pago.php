@@ -1,5 +1,4 @@
 <?php
-
 session_start(); // Iniciar sesión
 
 if (!isset($_SESSION['idusuario'])) {
@@ -29,10 +28,27 @@ $conexion = conexion(); // Crear la conexión a la base de datos
 <!-- Navbar End -->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
-
-        <!-- Metodos de pago -->
-           
+        <div class="col-md-6">
+            <!-- Pago con tarjeta -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Pago con tarjeta</h5>
+                    <p class="card-text">Seleccione esta opción si desea realizar el pago utilizando una tarjeta de crédito.</p>
+                    <a href="pagoTarjeta.php" class="btn btn-primary">Pagar con Tarjeta</a>
+                    <img src="./img/VISA-logo.png" alt="Pago con tarjeta" class="img-fluid" style="width: 100px; height: 50px;">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- Pago en efectivo -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Pago en efectivo</h5>
+                    <p class="card-text">Seleccione esta opción si desea realizar el pago en efectivo en el momento de la entrega.</p>
+                    <a href="pagoEfectivo.php" class="btn btn-primary">Pagar con Efectivo</a>
+                    <img src="./img/oxxopay_brand.png" alt="Pago en efectivo" class="img-fluid" style="width: 200px; height: 50px;">
+                </div>
+            </div>
         </div>
     </div>
 </div>

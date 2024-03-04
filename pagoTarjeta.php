@@ -120,6 +120,7 @@ if (isset($_POST['accion']) && $_POST['accion'] == 'comprar') {
   <link href="css/pagoTarjeta.css" rel="stylesheet">
 </head>
 
+
 <div class="container">
   <div class="card">
     <form action="" method="post" onsubmit="return validarFormulario()">
