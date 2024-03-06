@@ -237,7 +237,7 @@ if (isset($_SESSION['idusuario'])) {
                 <div class="w-100">
                     <div class="input-group">
                         <div class="input-group-append">
-                            <button class="btn btn-primary font-weight-bold px-3">REGISTRARCE</button>
+                            <button class="btn btn-primary font-weight-bold px-3" href="cerrarsesion.php">REGISTRARSE</button>
                         </div>
                     </div>
                 </div>

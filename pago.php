@@ -20,7 +20,7 @@ $conexion = conexion(); // Crear la conexión a la base de datos
 <!-- Page Header Start -->
 <div class="container-fluid page-header mb-4 position-relative overlay-bottom">
     <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
-        <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">PAGO</h1>
+        <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">PAGO</h1><!-- Titulo de la sección -->
     </div>
 </div>
 </div>

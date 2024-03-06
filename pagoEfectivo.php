@@ -83,6 +83,7 @@ foreach ($datos as $datos1) {
             $result_articulo = mysqli_stmt_get_result($stmt_articulo);
             $articulo = mysqli_fetch_assoc($result_articulo);
             ?>
+            <!--Datos que se agregan al comprobante a pagar con efectivo-->
             <li>
               <h3><?php echo $articulo['nombre']; ?></h3>
               <p><?php echo $articulo['descripcion']; ?></p>
