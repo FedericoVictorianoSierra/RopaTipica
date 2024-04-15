@@ -1,5 +1,6 @@
 <?php
 
+/*
 global $enlace;
 function conexion(){
         $enlace = mysqli_connect('localhost', 'root', '','ropatipica');
@@ -11,16 +12,15 @@ function conexion(){
             exit;
         }
         return $enlace;
-}
-/*
+}*/
 
 global $enlace;
 
 function conexion() {
-    $host = 'sql312.epizy.com';
-    $username = 'epiz_34166469';
-    $password = 'zN6acr7lMW';
-    $database = 'epiz_34166469_ropatipica';
+    $host = 'sql301.infinityfree.com';
+    $username = 'if0_36053438';
+    $password = '7K97X6c6yUMFw';
+    $database = 'if0_36053438_ropatipica';
 
     $enlace = mysqli_connect($host, $username, $password, $database);
 
@@ -33,5 +33,5 @@ function conexion() {
 
     return $enlace;
 }
-*/
+
 ?>
