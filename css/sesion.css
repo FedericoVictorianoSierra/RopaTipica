@@ -36,16 +36,14 @@ body {
   background-color: #e6e6e6;
   border-radius: 5px;
   padding: 18px;
-  /* agregar aquí cualquier otra propiedad que desees cambiar */
 }
-
+/*Diseño altura del registro*/
 #tab2:checked ~  .tab-content > form {
-  height: 1000px;
+  height: 800px;
   width: 300px;
   background-color: #e6e6e6;
   border-radius: 5px;
   padding: 18px;
-  /* agregar aquí cualquier otra propiedad que desees cambiar */
 }
 
 .grid .cube .tabs li {

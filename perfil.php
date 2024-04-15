@@ -62,18 +62,18 @@ if (mysqli_num_rows($result) == 1) { // Verificar si la consulta devolvió exact
     <div class="perfil-usuario-body">
         <div class="perfil-usuario-bio">
             <h3 class="titulo">Nombre del Usuario: <br> <?php echo $nombreusuario; ?></h3>
-            <p class="texto">Descipcion del perfil: <?php echo $rolnombre ?></p>
+            <p class="texto">Descripción del perfil: <?php echo $rolnombre ?></p>
         </div>
         <div class="perfil-usuario-footer">
             <ul class="lista-datos">
                 <li><i class="icono fas fa-map-signs"></i> Nombre: <?php echo $Nombre ?></li>
-                <li><i class="icono fas fa-user-check"></i> Apellido Paterno: <?php echo $apellidoP ?></li>
-                <li><i class="icono fas fa-user-check"></i> Apellido Materno: <?php echo $apellidoM ?></li>
+                <!--<li><i class="icono fas fa-user-check"></i> Apellido Paterno:--> <?php /*echo $apellidoP*/ ?></li>
+                <!--<li><i class="icono fas fa-user-check"></i> Apellido Materno:--> <?php /*echo $apellidoM*/ ?></li>
                 <li><i class="icono fas fa-phone-alt"></i> Telefono: <?php echo $Telefono ?></li>
                 <li><i class="icono fas fa-briefcase"></i> Email: <?php echo $Email ?></li>
             </ul>
             <ul class="lista-datos">
-                <li><i class="icono fas fa-map-marker-alt"></i> País: <?php echo $Pais ?></li>
+                <!--<li><i class="icono fas fa-map-marker-alt"></i> País:--> <?php /*echo $Pais*/ ?></li>
                 <li><i class="icono fas fa-map-marker-alt"></i> Estado: <?php echo $Estado ?></li>
                 <li><i class="icono fas fa-map-marker-alt"></i> Ciudad: <?php echo $Ciudad ?></li>
                 <li><i class="icono fas fa-map-marker-alt"></i> Codigo Postal: <?php echo $CodigoP ?></li>
@@ -87,14 +87,17 @@ if (mysqli_num_rows($result) == 1) { // Verificar si la consulta devolvió exact
 
             </ul>
         </div>
+        <!-- Redes Sociales
         <div class="redes-sociales">
             <a href="" class="boton-redes facebook fab fa-facebook-f"><i class="icon-facebook"></i></a>
             <a href="" class="boton-redes twitter fab fa-twitter"><i class="icon-twitter"></i></a>
             <a href="" class="boton-redes instagram fab fa-instagram"><i class="icon-instagram"></i></a>
         </div>
+        -->
     </div>
 </section>
 
+<!-- Redes Sociales
 <div class="mis-redes" style="display: block;position: fixed;bottom: 1rem;left: 1rem; opacity: 0.5; z-index: 1000;">
     <p style="font-size: .75rem;">Ropa típica</p>
     <div>
@@ -104,5 +107,7 @@ if (mysqli_num_rows($result) == 1) { // Verificar si la consulta devolvió exact
         <a target="_blank" href="https://www.youtube.com/channel/UC15DkMZQ80aoW_Rqk4n2T_w"><i class="fab fa-youtube"></i></a>
     </div>
 </div>
+-->
+
 <?php include_once "pie.php" ?>
 <?php include_once "ventana.php" ?>

@@ -45,16 +45,16 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
   $nombreUsuario = $_POST['nombreUsuario'];
   $password = $_POST['password'];
   $nombre = $_POST['nombre'];
-  $apellidoPat = $_POST['apellidoPat'];
-  $apellidoMat = $_POST['apellidoMat'];
+  $apellidoPat = /*$_POST['apellidoPat'];*/'';
+  $apellidoMat = /*$_POST['apellidoMat'];*/'';
   $telefono = $_POST['telefono'];
   $email = $_POST['email'];
-  $pais = $_POST['pais'];
+  $pais = /*$_POST['pais'];*/'';
   $estado = $_POST['estado'];
   $ciudad = $_POST['ciudad'];
   $colonia = $_POST['colonia'];
   $calle = $_POST['calle'];
-  $numcalle = $_POST['numcalle'];
+  $numcalle = /*$_POST['numcalle'];*/'';
   $codigopostal = $_POST['codigopostal'];
   $rol = $_POST['roles'];
 
@@ -118,6 +118,7 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
   <meta name="author" content="Source code generated using layout">
   <meta name="author" content="LayoutIt!">
   <link href="css/sesion.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -152,41 +153,54 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
                 <label class="frm">Password:</label>
                 <input type="password" name="password" required="required">
 
-                <label class="frm">Nombre:</label>
-                <input type="text" name="nombre" required="required">
+                <Br>
+                <Br>
 
+                <label class="frm">Nombre completo:</label>
+                <input type="text" name="nombre" required="required" onkeypress="return soloLetras(event)">
+
+                <!-- 
                 <label class="frm">Apellido paterno:</label>
                 <input type="text" name="apellidoPat" required="required">
 
                 <label class="frm">Apellido materno:</label>
                 <input type="text" name="apellidoMat" required="required">
+                -->
 
                 <label class="frm">Teléfono:</label>
-                <input type="number" name="telefono" required="required">
+                <input type="text" name="telefono" required="required" maxlength="10" onkeypress="return soloNumeros(event)">
 
-                <label class="frm">Email:</label>
+                <label class="frm">E-mail:</label>
                 <input type="email" name="email" required="required">
 
+                <!-- 
                 <label class="frm">Pais:</label>
                 <input type="text" name="pais" required="required">
+                -->
 
-                <label class="frm">Estado:</label>
-                <input type="text" name="estado" required="required">
+                <label >Estado:</label>
+                <select id="estado" name="estado" required>
+                    <!-- Opciones de estado se cargarán dinámicamente -->
+                </select>
 
-                <label class="frm">Ciudad:</label>
-                <input type="text" name="ciudad" required="required">
+                <label >Ciudad:</label>
+                <select id="municipio" name="ciudad" required>
+                    <!-- Opciones de ciudad se cargarán dinámicamente -->
+                </select>
 
                 <label class="frm">Colonia:</label>
-                <input type="text" name="colonia" required="required">
+                <input type="text" name="colonia" required="required" onkeypress="return soloLetras(event)">
 
                 <label class="frm">Calle:</label>
-                <input type="text" name="calle" required="required">
+                <input type="text" name="calle" required="required" onkeypress="return soloLetras(event)">
 
+                <!--
                 <label class="frm">Número:</label>
                 <input type="number" name="numcalle" required="required">
+                -->
 
                 <label class="frm">Código postal:</label>
-                <input type="number" name="codigopostal" required="required">
+                <input type="text"name="codigopostal" required="required" maxlength="5" onkeypress="return soloNumeros(event)">
 
                 <label>Rol:</label>
                 <select name="roles">
@@ -206,6 +220,19 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
         </ul>
       </div>
       <script src="js/jquery.min.js"></script>
+      
+       <!--Selecctor de municipio y ciudad -->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/municipios.js"></script>
+    <script type="text/javascript" src="js/select_estados.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $('select').material_select();
+        });
+    </script>
+
+<script src="js/validacion.js"></script>
+
 </body>
 
 </html>
