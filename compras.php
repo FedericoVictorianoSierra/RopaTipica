@@ -25,7 +25,7 @@ $result = mysqli_query($conexion, $sql); // Ejecuta la consulta y guarda el resu
 <!-- Compras cliente -->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12"> 
             <table class="table tabla1">
                 <thead>
                     <tr>

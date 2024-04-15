@@ -133,11 +133,11 @@ if (isset($_POST['accion']) && $_POST['accion'] == 'comprar') {
 
       <img src="./img/VISA-logo.png" class="logo-card">
       <label>Número de tarjeta:</label>
-      <input id="user" class="input cardnumber" placeholder="1234 5678 9101 1121" type="number" pattern="[0-9]{16}" required>
+      <input id="user" class="input cardnumber" placeholder="1234 5678 9101 1121" maxlength="16" onkeypress="return soloNumeros(event)" required>
       <label>Nombre:</label>
-      <input id="nombre" class="input name" placeholder="Juan Pérez" type="text" required>
+      <input id="nombre" class="input name" placeholder="Juan Pérez" type="text" onkeypress="return soloLetras(event)" required>
       <label class="toleft">CCV:</label>
-      <input id="ccv" class="input toleft ccv" placeholder="321" type="number" pattern="[0-9]{3}" maxlength="3" required>
+      <input id="ccv" class="input toleft ccv" placeholder="321" maxlength="3" onkeypress="return soloNumeros(event)" required>
     </form>
   </div>
 
@@ -185,19 +185,4 @@ if (isset($_POST['accion']) && $_POST['accion'] == 'comprar') {
   </div>
 
 </div>
-
-<script>
-  function validarFormulario() {
-    // Obtener los valores de los campos
-    var numeroTarjeta = document.getElementById("user").value;
-    var nombre = document.getElementById("nombre").value;
-    var ccv = document.getElementById("ccv").value;
-
-    // Verificar que los campos no estén vacíos
-    if (numeroTarjeta.trim() === "" || nombre.trim() === "" || ccv.trim() === "") {
-      alert("Por favor, complete todos los campos.");
-      return false; // Evitar el envío del formulario
-    }
-    return true; // Permitir el envío del formulario si todos los campos están completos
-  }
-</script>
+<script src="js/validacion.js"></script>

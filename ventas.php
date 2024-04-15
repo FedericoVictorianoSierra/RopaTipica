@@ -22,12 +22,13 @@ $result = mysqli_query($conexion, $sql);
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
+        <?php echo "<td><a class='btn btn-info' href='imprimirVentas.php?'><i class='fa fa-print'></i></a></td>"; ?>
             <table class="table tabla1">
                 <thead>
                     <tr>
                         <th>Fecha de compra</th>
                         <th>Usuario</th>
-                        <th>Imagen</th>
+                        <th>Imagen</th> 
                         <th>Código</th>
                         <th>Artículos</th>
                         <th>Descripción</th>
@@ -39,7 +40,7 @@ $result = mysqli_query($conexion, $sql);
                     <?php
                     while ($row = mysqli_fetch_assoc($result)) {
                         $fecha = $row['fecha'];
-                        $impuesto = $row['impuesto'];
+                        $impuesto = $row['impuesto']; 
                         $total = $row['total'];
 
                         // Realizar consulta para obtener el usuario asociada al idusuario
