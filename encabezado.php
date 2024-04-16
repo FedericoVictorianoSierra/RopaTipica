@@ -7,6 +7,30 @@ $query_usuario = "SELECT idrol FROM usuario WHERE idusuario = $idusuario";
 $resultado_usuario = mysqli_query($conexion, $query_usuario);
 $fila_usuario = mysqli_fetch_assoc($resultado_usuario);
 $idrol = $fila_usuario['idrol'];
+
+// Consulta SQL para obtener la suma de la cantidad del articulos en el carrito
+$query_suma_cantidad = "SELECT SUM(cantidad) AS suma_cantidad FROM carrito WHERE idusuario = $idusuario AND activo = 1";
+
+// Ejecutar la consulta
+$resultado_suma_cantidad = mysqli_query($conexion, $query_suma_cantidad);
+
+// Verificar si se obtuvieron resultados
+if ($resultado_suma_cantidad) {
+    // Obtener el resultado como un array asociativo
+    $fila_suma_cantidad = mysqli_fetch_assoc($resultado_suma_cantidad);
+    
+    // Obtener la suma de la cantidad
+    $suma_cantidad = $fila_suma_cantidad['suma_cantidad'];
+    
+    // Verificar si la suma es NULL (no hay registros que cumplan con la condición)
+    if ($suma_cantidad === null) {
+        $suma_cantidad = 0; // Si es NULL, asignar cero
+    }
+} else {
+    // Manejar el caso de error en la consulta
+    echo "(" . mysqli_error($conexion). ")";
+}
+
 ?>
 <html lang="en">
 
@@ -52,19 +76,17 @@ $idrol = $fila_usuario['idrol'];
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-4">
-
                     <a href="index.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>">INICIO</a>
                     <a href="categoria.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'categoria.php') ? 'active' : ''; ?>">CATEGORÍA</a>
-                    <a href="articulos.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'articulos.php') ? 'active' : ''; ?>">ARTÍCULOS</a>
+                    <a href="articulos.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'articulos.php') ? 'active' : ''  ?>">ARTÍCULOS</a>
                     <?php
                     if ($idrol == 1) { ?>
-                        <a href="carrito.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'carrito.php') ? 'active' : ''; ?>">CARRITO</a>
-                    <?php } else { ?>
+                        <a href="carrito.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'carrito.php') ? 'active' : ''; ?>">CARRITO (<?php echo $suma_cantidad; ?>)</a>
+                        <?php } else { ?>
                         <a href="ventas.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'ventas.php') ? 'active' : ''; ?>">VENDIDO</a>
                     <?php } ?>
                     <a href="perfil.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'perfil.php') ? 'active' : ''; ?>">PERFIL</a>
                     <a href="cerrarsesion.php" class="nav-item nav-link">CERRAR SESIÓN</a>
-
                 </div>
             </div>
     </div>

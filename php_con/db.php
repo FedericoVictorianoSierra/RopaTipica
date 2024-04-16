@@ -1,6 +1,6 @@
 <?php
 
-/*
+
 global $enlace;
 function conexion(){
         $enlace = mysqli_connect('localhost', 'root', '','ropatipica');
@@ -12,8 +12,8 @@ function conexion(){
             exit;
         }
         return $enlace;
-}*/
-
+}
+/*
 global $enlace;
 
 function conexion() {
@@ -33,5 +33,5 @@ function conexion() {
 
     return $enlace;
 }
-
+*/
 ?>

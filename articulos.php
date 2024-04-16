@@ -33,7 +33,7 @@ if (isset($_POST['agregar_carrito'])) {
     }
 
     // Redirigir al usuario a la página del carrito de compras
-    echo "<script>location.href='carrito.php';</script>";
+    //echo "<script>location.href='carrito.php';</script>";
 }
 
 ?>
