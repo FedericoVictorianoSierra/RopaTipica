@@ -51,7 +51,7 @@ $result = mysqli_query($conexion, $sql); // Ejecuta la consulta y guarda el resu
                             if ($current_date !== null) { // Si no es la primera fecha
                                 //juntar 6 columnas en Total
                                 echo "<tr>
-                                    <td colspan='7' style='text-align: right; background-color: #DA9F5B; color: white;'>Total: </td>
+                                    <td colspan='7' style='text-align: right; background-color: #41C9E2; color: white;'>Total: </td>
                                     <td><strong>$subtotal_fecha</strong></td>
                                 </tr>";
                                 
@@ -87,7 +87,7 @@ $result = mysqli_query($conexion, $sql); // Ejecuta la consulta y guarda el resu
                     // Imprime el subtotal de la última fecha
                     if ($current_date !== null) {
                         echo "<tr>
-                            <td colspan='7' style='text-align: right; background-color: #DA9F5B; color: white;'>Total: </td>
+                            <td colspan='7' style='text-align: right; background-color: #41C9E2; color: white;'>Total: </td>
                             <td><strong>$subtotal_fecha</strong></td>
                         </tr>";
                     }

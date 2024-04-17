@@ -176,9 +176,9 @@ if (isset($_SESSION['idusuario'])) {
     <!-- Offer Start -->
     <div class="offer container-fluid my-5 py-5 text-center position-relative overlay-top overlay-bottom">
         <div class="container py-5">
-            <h1 class="display-3 text-primary mt-3">50% OFF</h1>
-            <h1 class="text-white mb-3">DESCUENTO AL REGISTRARSE</h1>
-            <h4 class="text-white font-weight-normal mb-4 pb-3">SOLO POR HOY</h4>
+            <h1 class="display-3 text-primary mt-3">Bienvenido</h1>
+            <h1 class="text-white mb-3">LA MIXTEQUITA</h1>
+            <h4 class="text-white font-weight-normal mb-4 pb-3">http://ropatipica.rf.gd/</h4>
             <!-- <form class="form-inline justify-content-center mb-4"> -->
             <!-- <div class="input-group">
                     <input type="text" class="form-control p-4" placeholder="Your Email" style="height: 30px;"> -->
@@ -202,16 +202,6 @@ if (isset($_SESSION['idusuario'])) {
                 <p><i class="fa fa-map-marker-alt mr-2"></i>#23 DE CALLE ALDAMA TLAXIACO.OAXACA</p>
                 <p><i class="fa fa-phone-alt mr-2"></i>9539756822</p>
                 <p class="m-0"><i class="fa fa-envelope mr-2"></i>MIXTEQUITA@gmail.com</p>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">REDES SOCIALES</h4>
-                <p>TE INVITAMOS A VISITAR NUETRAS REDES SOCIALES</p>
-                <div class="d-flex justify-content-start">
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://mx.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square" href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
-                </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">HORARIO DE ATENCION</h4>

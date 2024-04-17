@@ -1,9 +1,9 @@
 .cuerpo{
-    background-color: blue;
+    background-color: #EEEEEE;
 }
 
 .tabla1{
-    background-color:#422F2B;
+    background-color:#3398DA;
     border-radius: 30px;
     /*border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;*/
@@ -20,7 +20,7 @@
 }
 
 .cuerpotabla{
-   background-color:#DA9F5B;
+   background-color:#EEEEEE;
     color: black;   
 }
 
@@ -83,7 +83,7 @@
 
 .botonstyle{
 
-    background-color: aqua;
+    background-color: #3398DA;
     color:black;
     border-radius: 5px;
 }
