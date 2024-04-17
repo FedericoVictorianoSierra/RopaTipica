@@ -116,17 +116,26 @@ if (isset($_POST['agregar_carrito'])) {
                         // Recorrer todos los artículos de la categoría actual
                         while ($fila_articulos = mysqli_fetch_assoc($resultado_articulos)) {
                             // Obtener la imagen del artículo actual
-                            $query_imagen = "SELECT imagen FROM img WHERE id_imagen = " . $fila_articulos['id_imagen'];
+                            //$query_imagen = "SELECT imagen FROM img WHERE id_imagen = " . $fila_articulos['id_imagen'];
+                            //$result_imagen = mysqli_query($conexion, $query_imagen);
+                            //$row_imagen = mysqli_fetch_assoc($result_imagen);
+
+                            $query_imagen = "SELECT nuevaImagen FROM img WHERE id_imagen = " . $fila_articulos['id_imagen'];
                             $result_imagen = mysqli_query($conexion, $query_imagen);
                             $row_imagen = mysqli_fetch_assoc($result_imagen);
+
 
                             // Mostrar cada artículo en su respectiva columna
                         ?>
                             <div class='col-lg-6'>
                                 <div class='row align-items-center mb-5'>
                                     <div class='col-4 col-sm-3'>
+
                                         <!-- Mostrar la imagen del artículo actual -->
-                                        <img class='w-100 rounded-circle mb-3 mb-sm-0' src='data:image/jpeg;base64,<?php echo base64_encode($row_imagen['imagen']); ?>' alt='imagen'>
+                                        <!--<img class='w-100 rounded-circle mb-3 mb-sm-0' src='data:image/jpeg;base64,<?php /*echo base64_encode($row_imagen['imagen']);*/ ?>' alt='imagen'>-->
+                                        
+                                        <img class='w-100 rounded-circle mb-3 mb-sm-0' src='<?php echo $row_imagen['nuevaImagen']; ?>' alt='imagen'>
+
                                         <h5 class='menu-price'><?php echo "$" . $fila_articulos['precio_venta']; ?></h5>
                                     </div>
                                     <div class='col-8 col-sm-9'>

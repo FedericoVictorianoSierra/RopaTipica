@@ -222,17 +222,6 @@ if (isset($_SESSION['idusuario'])) {
                     <p>2.00 PM - 8.00 PM</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">REGISTRATE</h4>
-                <p>PARA UNA MEJOR EXPERIENCIA</p>
-                <div class="w-100">
-                    <div class="input-group">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary font-weight-bold px-3" href="cerrarsesion.php">REGISTRARSE</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
             <p class="mb-2 text-white">MIXTEQUITAS &copy; <a class="font-weight-bold" href="#">COM</a>BORDADOS DEL CORAZON</a></p>

@@ -6,7 +6,6 @@ include 'conexion.php';
 if (isset($_POST['actualizar'])) {
 
     // Obtener los valores del formulario
-    $idrol = $_POST['idrol'];
     $nombre = $_POST['nombre'];
     $nombreUsuario = $_POST['nombreUsuario'];
     $password = $_POST['password'];
@@ -31,10 +30,10 @@ if (isset($_POST['actualizar'])) {
         $idimagen = mysqli_insert_id($conexion);
 
         // Actualizar los datos en la tabla usuario, incluyendo el nuevo id_imagen
-        $sql = "UPDATE usuario SET idrol='$idrol', nombre='$nombre', nombreUsuario='$nombreUsuario', password='$password', email='$correo' WHERE idusuario='$idusuario'";
+        $sql = "UPDATE usuario SET nombre='$nombre', nombreUsuario='$nombreUsuario', password='$password', email='$correo' WHERE idusuario='$idusuario'";
     } else {
         // Actualizar los datos en la tabla usuario sin actualizar la imagen
-        $sql = "UPDATE usuario SET idrol='$idrol', nombre='$nombre', nombreUsuario='$nombreUsuario' , password='$password', email='$correo' WHERE idusuario='$idusuario'";
+        $sql = "UPDATE usuario SET nombre='$nombre', nombreUsuario='$nombreUsuario' , password='$password', email='$correo' WHERE idusuario='$idusuario'";
     }
 
     if (mysqli_query($conexion, $sql)) {
@@ -94,13 +93,7 @@ if (!$resultado_rol) {
 <div class="container-fluid py-5">
     <div class="container">
         <form action="" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="idusuario" value="<?php echo $usuario['idusuario']; ?>">
-            <label for="idrol">Rol:</label>
-            <select class="btn-primary btn-lg px-4 me-sm-3" name="idrol" id="idrol">
-                <?php while ($rol = mysqli_fetch_assoc($resultado_rol)) : ?>
-                    <option value="<?php echo $rol['idrol']; ?>" <?php if ($rol['idrol'] == $usuario['idrol']) echo "selected"; ?>><?php echo $rol['nombre']; ?></option>
-                <?php endwhile; ?>
-            </select>
+
             <br>
             <label for="nombre">Nombre:</label>
             <input class="px-4 me-sm-3" type="text" name="nombre" id="nombre" value="<?php echo $usuario['nombre']; ?>" required="required">
