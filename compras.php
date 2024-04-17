@@ -71,7 +71,7 @@ $result = mysqli_query($conexion, $sql); // Ejecuta la consulta y guarda el resu
                                 echo "<td></td>";
                             }
                             echo "
-                            <td><img src='data:{$row['Tipo']};base64," . base64_encode($row['imagen']) . "' alt='imagen' width='100'></td>
+                            <td><img src='" . $row['imagen'] . "' alt='imagen' width='100'></td>
                             <td>{$row['codigo']}</td>
                             <td>{$row['nombre']}</td>
                             <td>{$row['descripcion']}</td>

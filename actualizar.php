@@ -38,39 +38,31 @@ if (isset($_POST['actualizar'])) {
     $descripcion = $_POST['descripcion'];
     $talla = $_POST['talla'];
     $modelo = $_POST['modelo'];
+    $imagen = $_POST['foto_'];
 
-    if (isset($_FILES['foto_']) && !empty($_FILES['foto_']['tmp_name'])) { // Se comprueba que se haya subido una foto
-        $nombreimg = basename($_FILES['foto_']['name']); // Se obtiene el nombre de la imagen
-        $imagen = addslashes(file_get_contents($_FILES['foto_']['tmp_name'])); // Se obtiene el contenido binario de la imagen
-        $tip = exif_imagetype($_FILES['foto_']['tmp_name']); //Se obtiene el tipo de imagen
-        $extension = image_type_to_extension($tip); // Se obtiene la extensión de la imagen
+    $nombreimg = "imagen"; // Se obtiene el nombre de la imagen
 
+    // Consulta SQL para recuperar los datos de articulo
+    $articulo_query = "SELECT * FROM articulo WHERE idarticulo='$idarticulo'";
+    // Ejecutar la consulta
+    $resultado_articulo = mysqli_query($conexion, $articulo_query);
+    // Obtener los datos de articulo
+    $articulo = mysqli_fetch_assoc($resultado_articulo);
 
-        // Consulta SQL para recuperar los datos de articulo
-        $articulo_query = "SELECT * FROM articulo WHERE idarticulo='$idarticulo'";
-        // Ejecutar la consulta
-        $resultado_articulo = mysqli_query($conexion, $articulo_query);
-        // Obtener los datos de articulo
-        $articulo = mysqli_fetch_assoc($resultado_articulo);
+    /// Se actualiza la imagen del articulo en la tabla img
+    $query_imagen = "UPDATE img SET nombre='$nombreimg',nuevaImagen='$imagen' WHERE Id_imagen='$articulo[id_imagen]'";
+    mysqli_query($conexion, $query_imagen);
+    $idimagen = mysqli_insert_id($conexion);
 
-        /// Se actualiza la imagen del articulo en la tabla img
-        $query_imagen = "UPDATE img SET nombre='$nombreimg',imagen='$imagen', Tipo='$extension' WHERE Id_imagen='$articulo[id_imagen]'";
-        mysqli_query($conexion, $query_imagen);
-        $idimagen = mysqli_insert_id($conexion);
-
-        // Actualizar los datos en la tabla articulo, incluyendo el nuevo id_imagen
-        $sql = "UPDATE articulo SET idcategoria='$idcategoria', codigo='$codigo', nombre='$nombre', precio_venta='$precio_venta', existencia='$existencia', descripcion='$descripcion', talla='$talla', modelo='$modelo' WHERE idarticulo='$idarticulo'";
-    } else {
-        // Actualizar los datos en la tabla articulo sin actualizar la imagen
-        $sql = "UPDATE articulo SET idcategoria='$idcategoria', codigo='$codigo', nombre='$nombre', precio_venta='$precio_venta', existencia='$existencia', descripcion='$descripcion', talla='$talla', modelo='$modelo' WHERE idarticulo='$idarticulo'";
-    }
+    // Actualizar los datos en la tabla articulo sin actualizar la imagen
+    $sql = "UPDATE articulo SET idcategoria='$idcategoria', codigo='$codigo', nombre='$nombre', precio_venta='$precio_venta', existencia='$existencia', descripcion='$descripcion', talla='$talla', modelo='$modelo' WHERE idarticulo='$idarticulo'";
 
     if (mysqli_query($conexion, $sql)) {
         $textoModal = "Los datos se han actualizado correctamente.";
         $mostrarModal = true;
         $nombreArchivo = "articulos.php";
     } else {
-        $textoModal = "Error al actualizar los datos:". mysqli_error($conexion);
+        $textoModal = "Error al actualizar los datos:" . mysqli_error($conexion);
         $mostrarModal = true;
         $nombreArchivo = "actualizar.php";
     }
@@ -154,8 +146,29 @@ if (!$resultado_categorias) {
             <label for="modelo">Modelo:</label>
             <input class="px-4 me-sm-3" type="text" name="modelo" id="modelo" value="<?php echo $articulo['modelo']; ?>" required="required">
             <br>
-            <label for="foto_">Foto:</label>
-            <input class="px-4 me-sm-3" type="file" name="foto_" id="foto_">
+
+            <label for="foto_">URL Foto:</label>
+            <!--<input class="px-4 me-sm-3" type="file" name="foto_" id="foto_">-->
+            <?php
+            // Consulta SQL para recuperar la URL de la imagen
+            $query_imagen = "SELECT nuevaImagen FROM img WHERE Id_imagen='$articulo[id_imagen]'";
+            // Ejecutar la consulta
+            $resultado_imagen = mysqli_query($conexion, $query_imagen);
+            // Verificar si se encontró la imagen
+            if ($resultado_imagen && mysqli_num_rows($resultado_imagen) > 0) {
+                // Obtener la URL de la imagen
+                $imagen = mysqli_fetch_assoc($resultado_imagen);
+                $url_imagen = $imagen['nuevaImagen'];
+            } else {
+                // Si no se encuentra la imagen, establecer una URL predeterminada o manejar el caso según tus necesidades
+                $url_imagen = ""; // Puedes establecer una URL predeterminada o un mensaje de error
+            } 
+            
+            // Mostrar la URL de la imagen en el campo de entrada de texto del formulario
+            ?>
+
+            <input class="px-4 me-sm-3" type="text" name="foto_" id="foto_" value="<?php echo $url_imagen; ?>" required="required">
+
             <br>
             <input class="btn btn-secondary font-weight-bold py-2 px-4 mt-2" type="submit" name="actualizar" value="Actualizar">
         </form>

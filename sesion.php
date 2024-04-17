@@ -157,7 +157,7 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
                 <Br>
 
                 <label class="frm">Nombre completo:</label>
-                <input type="text" placeholder="Heidi Lucy Butista Sanjuan" name="nombre" required="required" onkeypress="return soloLetras(event)">
+                <input type="text" minlength="10" maxlength="128" placeholder="Heidi Lucy Butista Sanjuan" name="nombre" required="required" onkeypress="return soloLetras(event)">
 
                 <!-- 
                 <label class="frm">Apellido paterno:</label>
@@ -168,7 +168,7 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
                 -->
 
                 <label class="frm">Teléfono:</label>
-                <input type="text" placeholder="953 123 45 67" name="telefono" required="required" maxlength="10" onkeypress="return soloNumeros(event)">
+                <input type="text" placeholder="953 123 45 67" name="telefono" required="required" minlength="10" maxlength="10" onkeypress="return soloNumeros(event)">
 
                 <label class="frm">E-mail:</label>
                 <input type="email" placeholder="usuario@gmail.com" name="email" required="required">
@@ -189,10 +189,10 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
                 </select>
 
                 <label class="frm">Colonia:</label>
-                <input type="text" placeholder="Colonia Falsa" name="colonia" required="required" onkeypress="return soloLetras(event)">
+                <input type="text" placeholder="Colonia Falsa" minlength="6" maxlength="128" name="colonia" required="required" onkeypress="return soloLetras(event)">
 
                 <label class="frm">Calle:</label>
-                <input type="text" placeholder="Avenida Falsa" name="calle" required="required" onkeypress="return soloLetras(event)">
+                <input type="text" placeholder="Avenida Falsa" minlength="6" maxlength="128" name="calle" required="required" onkeypress="return soloLetras(event)">
 
                 <!--
                 <label class="frm">Número:</label>
@@ -200,7 +200,7 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
                 -->
 
                 <label class="frm">Código postal:</label>
-                <input type="text" placeholder="69000" name="codigopostal" required="required" maxlength="5" onkeypress="return soloNumeros(event)">
+                <input type="text" minlength="5" maxlength="5" placeholder="69000" name="codigopostal" required="required" maxlength="5" onkeypress="return soloNumeros(event)">
 
                 <label>Rol:</label>
                 <select name="roles">

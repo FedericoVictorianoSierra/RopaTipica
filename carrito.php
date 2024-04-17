@@ -78,7 +78,7 @@ while ($resultado = mysqli_fetch_array($registros)) {
                         $articulo = mysqli_fetch_assoc($resultado);
 
                         // Obtener imagen de la base de datos
-                        $query_imagen = "SELECT imagen FROM img WHERE id_imagen = " . $articulo['id_imagen'];
+                        $query_imagen = "SELECT nuevaImagen FROM img WHERE id_imagen = " . $articulo['id_imagen'];
                         $result_imagen = mysqli_query($conexion, $query_imagen);
                         $row_imagen = mysqli_fetch_assoc($result_imagen);
 
@@ -92,7 +92,7 @@ while ($resultado = mysqli_fetch_array($registros)) {
 
                         <tr class="cuerpotabla">
                             <!-- Mostrar la imagen del artículo -->
-                            <td><img src='data:<?php echo $row_imagen['Tipo']; ?>;base64,<?php echo base64_encode($row_imagen['imagen']); ?>' alt='imagen' width='100'></td>
+                            <td><img src='<?php echo $row_imagen['nuevaImagen']; ?>' alt='imagen' width='100'></td>
                             <td><?php echo $articulo['nombre']; ?></td>
                             <td><?php echo $articulo['existencia']; ?></td>
                             <td><?php echo "$" . $articulo['precio_venta']; ?></td>

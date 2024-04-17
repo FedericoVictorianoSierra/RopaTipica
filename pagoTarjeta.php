@@ -133,11 +133,11 @@ if (isset($_POST['accion']) && $_POST['accion'] == 'comprar') {
 
       <img src="./img/VISA-logo.png" class="logo-card">
       <label>Número de tarjeta:</label>
-      <input id="user" class="input cardnumber" placeholder="1234 5678 9101 1121" maxlength="16" onkeypress="return soloNumeros(event)" required>
+      <input id="user" class="input cardnumber" placeholder="1234 5678 9101 1121" minlength="16" maxlength="16" onkeypress="return soloNumeros(event)" required>
       <label>Nombre:</label>
-      <input id="nombre" class="input name" placeholder="Juan Pérez" type="text" onkeypress="return soloLetras(event)" required>
+      <input id="nombre" class="input name" value='<?php echo $nombreusuario ?>' type="text" onkeypress="return soloLetras(event)" required>
       <label class="toleft">CCV:</label>
-      <input id="ccv" class="input toleft ccv" placeholder="321" maxlength="3" onkeypress="return soloNumeros(event)" required>
+      <input id="ccv" class="input toleft ccv" placeholder="321" minlength="3" maxlength="3" onkeypress="return soloNumeros(event)" required>
     </form>
   </div>
 
