@@ -64,6 +64,7 @@ if (isset($_SESSION['idusuario'])) {
                     if (isset($_SESSION['idusuario'])) {
                         if ($idrol == 1) { ?>
                             <a href="carrito.php" class="nav-item nav-link">CARRITO</a>
+                            <a href="compras.php" class="nav-item nav-link">COMPRAS</a>
                         <?php } else { ?>
                             <a href="ventas.php" class="nav-item nav-link">VENDIDO</a>
                         <?php }

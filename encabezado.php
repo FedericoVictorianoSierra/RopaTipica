@@ -82,6 +82,8 @@ if ($resultado_suma_cantidad) {
                     <?php
                     if ($idrol == 1) { ?>
                         <a href="carrito.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'carrito.php') ? 'active' : ''; ?>">CARRITO (<?php echo $suma_cantidad; ?>)</a>
+                        <a href="compras.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'compras.php') ? 'active' : ''; ?>">COMPRAS</a>
+
                         <?php } else { ?>
                         <a href="ventas.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'ventas.php') ? 'active' : ''; ?>">VENDIDO</a>
                     <?php } ?>

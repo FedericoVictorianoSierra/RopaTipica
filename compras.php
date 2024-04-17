@@ -3,7 +3,7 @@ $idusuario = "";
 include 'conexion.php'; // Incluye el archivo de conexión a la base de datos
 
 // Consulta SQL para obtener las compras del usuario ordenadas por fecha
-$sql = "SELECT venta.fecha, venta.total, venta.idventa, carrito.idcarrito, carrito.cantidad, articulo.codigo, articulo.nombre, articulo.descripcion, img.Tipo, img.imagen FROM venta 
+$sql = "SELECT venta.fecha, venta.total, venta.idventa, carrito.idcarrito, carrito.cantidad, articulo.codigo, articulo.nombre, articulo.descripcion, img.Tipo, img.nuevaImagen FROM venta 
         INNER JOIN carrito ON venta.idcarrito = carrito.idcarrito 
         INNER JOIN articulo ON carrito.idarticulo = articulo.idarticulo 
         INNER JOIN img ON articulo.id_imagen = img.id_imagen 
@@ -71,7 +71,7 @@ $result = mysqli_query($conexion, $sql); // Ejecuta la consulta y guarda el resu
                                 echo "<td></td>";
                             }
                             echo "
-                            <td><img src='" . $row['imagen'] . "' alt='imagen' width='100'></td>
+                            <td><img src='" . $row['nuevaImagen'] . "' alt='nuevaImagen' width='100'></td>
                             <td>{$row['codigo']}</td>
                             <td>{$row['nombre']}</td>
                             <td>{$row['descripcion']}</td>

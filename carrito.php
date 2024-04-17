@@ -48,9 +48,6 @@ while ($resultado = mysqli_fetch_array($registros)) {
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <a href="compras.php" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">COMPRAS</a>
-            <br>
-            <br>
             <?php
             // Verificar si el carrito está vacío
             if (empty($datos)) {
