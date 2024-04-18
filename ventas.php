@@ -2,7 +2,25 @@
 
 include 'conexion.php';
 
-$sql = "SELECT idusuario, idcarrito, fecha, impuesto, total FROM venta";
+
+// Inicializar la variable $fecha_seleccionada
+$fecha_seleccionada = "";
+
+// Procesar el formulario si se envió
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha'])) {
+    // Obtener la fecha del formulario
+    $fecha_seleccionada = $_POST['fecha'];
+
+    // Consulta SQL para seleccionar las ventas por fecha (comparando solo la parte de la fecha excluyendo la de hora)
+    $sql = "SELECT idusuario, idcarrito, fecha, impuesto, total FROM venta WHERE DATE(fecha) = '$fecha_seleccionada'";
+} else {
+    // Consulta SQL predeterminada para seleccionar todas las ventas
+    $sql = "SELECT idusuario, idcarrito, fecha, impuesto, total FROM venta";
+}
+
+
+//$sql = "SELECT idusuario, idcarrito, fecha, impuesto, total FROM venta";
+
 $result = mysqli_query($conexion, $sql);
 ?>
 
@@ -22,83 +40,112 @@ $result = mysqli_query($conexion, $sql);
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-        <?php echo "<td><a class='btn btn-info' href='imprimirVentas.php?'><i class='fa fa-print'></i></a></td>"; ?>
-            <table class="table tabla1">
-                <thead>
-                    <tr>
-                        <th>Fecha de compra</th>
-                        <th>Usuario</th>
-                        <th>Imagen</th> 
-                        <th>Código</th>
-                        <th>Artículos</th>
-                        <th>Descripción</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $fecha = $row['fecha'];
-                        $impuesto = $row['impuesto']; 
-                        $total = $row['total'];
 
-                        // Realizar consulta para obtener el usuario asociada al idusuario
-                        $query_usuario = "SELECT nombre FROM usuario WHERE idusuario= " . $row['idusuario'];
-                        $result_usuario = mysqli_query($conexion, $query_usuario);
-                        $row_usuario = mysqli_fetch_assoc($result_usuario);
 
-                        $usuarionombre = $row_usuario['nombre'];
 
-                        $idcarrito = $row['idcarrito'];
-                        $sqlcarrito = "SELECT * FROM carrito WHERE idcarrito = $idcarrito";
-                        $resultadocarrito = mysqli_query($conexion, $sqlcarrito);
-                        $rowcarrito = mysqli_fetch_assoc($resultadocarrito);
+            <!-- Formulario para seleccionar la fecha -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <form method="post" class="mb-4">
+                            <div class="form-group">
+                                <label for="fecha">Filtrar por fecha:</label>
+                                <input type="date" id="fecha" name="fecha" class="form-control" value="<?php echo date('Y-m-d'); ?>">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Filtrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-                        $idarticulo = $rowcarrito['idarticulo'];
-                        $sqlarticulo = "SELECT * FROM articulo WHERE idarticulo = $idarticulo";
-                        $resultadoarticulo = mysqli_query($conexion, $sqlarticulo);
-                        $rowarticulo = mysqli_fetch_assoc($resultadoarticulo);
 
-                        // Obtener imagen de la base de datos
-                        $query_imagen = "SELECT nuevaImagen FROM img WHERE id_imagen = " . $rowarticulo['id_imagen'];
-                        $result_imagen = mysqli_query($conexion, $query_imagen);
-                        $row_imagen = mysqli_fetch_assoc($result_imagen);
-                    ?>
-                        <?php
-                        ?>
-                        <tr>
 
-                            <td><?php echo $fecha; ?></td>
-                            <td><?php echo $usuarionombre; ?></td>
-                            <td><img src='<?php echo $row_imagen['nuevaImagen']; ?>' alt='imagen' width='100'></td>
-                            <td><?php echo $rowarticulo['codigo']; ?></td>
-                            <td><?php echo $rowarticulo['nombre']; ?></td>
-                            <td><?php echo $rowarticulo['descripcion']; ?></td>
-                            <td><?php echo $rowcarrito['cantidad']; ?></td>
-                            <td><?php echo "$" . $total; ?></td>
-                        </tr>
-                    <?php
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-<script src="js/jquery.min.js"></script>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<?php include_once "pie.php" ?>
+            <!-- Ventas (Administrador)-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <?php if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha']) && mysqli_num_rows($result) > 0) : ?>
+                            <?php echo "<td><a class='btn btn-info' href='imprimirVentas.php?fecha=$fecha_seleccionada'><i class='fa fa-print'></i></a></td>"; ?>
+                            <table class="table tabla1">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha de compra</th>
+                                        <th>Usuario</th>
+                                        <th>Imagen</th>
+                                        <th>Código</th>
+                                        <th>Artículos</th>
+                                        <th>Descripción</th>
+                                        <th>Cantidad</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    while ($row = mysqli_fetch_assoc($result)) {
+
+                                        $fecha = $row['fecha'];
+                                        $impuesto = $row['impuesto'];
+                                        $total = $row['total'];
+
+                                        // Realizar consulta para obtener el usuario asociada al idusuario
+                                        $query_usuario = "SELECT nombre FROM usuario WHERE idusuario= " . $row['idusuario'];
+                                        $result_usuario = mysqli_query($conexion, $query_usuario);
+                                        $row_usuario = mysqli_fetch_assoc($result_usuario);
+
+                                        $usuarionombre = $row_usuario['nombre'];
+
+                                        $idcarrito = $row['idcarrito'];
+                                        $sqlcarrito = "SELECT * FROM carrito WHERE idcarrito = $idcarrito";
+                                        $resultadocarrito = mysqli_query($conexion, $sqlcarrito);
+                                        $rowcarrito = mysqli_fetch_assoc($resultadocarrito);
+
+                                        $idarticulo = $rowcarrito['idarticulo'];
+                                        $sqlarticulo = "SELECT * FROM articulo WHERE idarticulo = $idarticulo";
+                                        $resultadoarticulo = mysqli_query($conexion, $sqlarticulo);
+                                        $rowarticulo = mysqli_fetch_assoc($resultadoarticulo);
+
+                                        // Obtener imagen de la base de datos
+                                        $query_imagen = "SELECT nuevaImagen FROM img WHERE id_imagen = " . $rowarticulo['id_imagen'];
+                                        $result_imagen = mysqli_query($conexion, $query_imagen);
+                                        $row_imagen = mysqli_fetch_assoc($result_imagen);
+                                    ?>
+                                        <?php
+                                        ?>
+                                        <tr>
+
+                                            <td><?php echo $fecha; ?></td>
+                                            <td><?php echo $usuarionombre; ?></td>
+                                            <td><img src='<?php echo $row_imagen['nuevaImagen']; ?>' alt='imagen' width='100'></td>
+                                            <td><?php echo $rowarticulo['codigo']; ?></td>
+                                            <td><?php echo $rowarticulo['nombre']; ?></td>
+                                            <td><?php echo $rowarticulo['descripcion']; ?></td>
+                                            <td><?php echo $rowcarrito['cantidad']; ?></td>
+                                            <td><?php echo "$" . $total; ?></td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        <?php elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha'])) : ?>
+                            <p>No se encontraron ventas para la fecha seleccionada.</p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            <script src="js/jquery.min.js"></script>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <?php include_once "pie.php" ?>

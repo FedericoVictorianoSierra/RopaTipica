@@ -2,14 +2,19 @@
 // Include the database connection file
 include 'conexion.php';
 
-// Set up SQL query to select sales data
+// Obtener la fecha seleccionada de la URL
+$fecha_seleccionada = isset($_GET['fecha']) ? $_GET['fecha'] : '';
+
+// Set up SQL query to select sales data for the specified date
 $sql = "SELECT v.fecha, u.nombre AS usuario, a.codigo, a.nombre AS articulo, a.descripcion, c.cantidad, v.total 
         FROM venta v
         INNER JOIN carrito c ON v.idcarrito = c.idcarrito
         INNER JOIN articulo a ON c.idarticulo = a.idarticulo
-        INNER JOIN usuario u ON v.idusuario = u.idusuario";
+        INNER JOIN usuario u ON v.idusuario = u.idusuario
+        WHERE DATE(v.fecha) = '$fecha_seleccionada'";
 $result = mysqli_query($conexion, $sql);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -9562,7 +9562,7 @@ h6,
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(51, 33, 29, 0.7);
+  background: rgba(255, 33, 29, 0.7);
   z-index: 1;
 }
 
@@ -9647,7 +9647,7 @@ h6,
 .page-header,
 .offer,
 .footer {
-  background: linear-gradient(rgba(255, 33, 29, 0.9), rgba(255, 33, 29, 0.9)), url(../img/bg.jpg);
+  background: linear-gradient(rgba(0, 255, 8, 0.9), rgba(8, 0, 255, 0.9)), url(../img/bg.jpg);
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;

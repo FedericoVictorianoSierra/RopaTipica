@@ -44,35 +44,14 @@ if (isset($_POST['agregar_carrito'])) {
 
 <?php include_once "encabezado.php" ?>
 
-<!-- Navbar End -->
-<div class="container-fluid p-0 mb-5">
-    <div id="blog-carousel" class="carousel slide overlay-bottom" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="w-100" src="img/caro1.png" height="600" alt="Image">
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                    <h2 class="text-primary font-weight-medium m-0">Atrevete a descubrir tú idendidad</h2>
-                    <h1 class="display-1 text-white m-0">ARTÍCULOS</h1>
-                    <h2 class="text-white m-0">* Con la mejor calidad del país*</h2>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img class="w-100" src="img/caro2.jpg" height="600" alt="Image">
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                    <h2 class="text-primary font-weight-medium m-0">Di quien eres sin hablar</h2>
-                    <h1 class="display-1 text-white m-0">ARTÍCULOS</h1>
-                    <h2 class="text-white m-0">* Bordados a mano *</h2>
-                </div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#blog-carousel" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href="#blog-carousel" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </a>
+<!-- Page Header Start -->
+<div class="container-fluid page-header mb-4 position-relative overlay-bottom">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+        <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">ARTÍCULOS</h1><!-- Titulo de la sección -->
     </div>
 </div>
+</div>
+
 <!-- Menu Start -->
 <div class="container-fluid pt-5">
     <div class="container">
@@ -98,9 +77,9 @@ if (isset($_POST['agregar_carrito'])) {
                     <div class='section-title'>
                         <h4 class='text-primary text-uppercase' style='letter-spacing: 5px;'>Artículos principales</h4>
                         <h1 class='display-4'><?php echo $fila_categorias['nombre']; ?></h1>
-                        <?php 
-                            // Mandar el ID de la categoría a imprimir para mostrar el catálogo
-                            echo "<a class='btn btn-info' href='imprimirCatalogo.php?id={$fila_categorias['idcategoria']}'><i class='fa fa-print'></i> Imprimir Catálogo</a>";  
+                        <?php
+                        // Mandar el ID de la categoría a imprimir para mostrar el catálogo
+                        echo "<a class='btn btn-info' href='imprimirCatalogo.php?id={$fila_categorias['idcategoria']}'><i class='fa fa-print'></i> Imprimir Catálogo</a>";
                         ?>
 
                     </div>
@@ -133,7 +112,7 @@ if (isset($_POST['agregar_carrito'])) {
 
                                         <!-- Mostrar la imagen del artículo actual -->
                                         <!--<img class='w-100 rounded-circle mb-3 mb-sm-0' src='data:image/jpeg;base64,<?php /*echo base64_encode($row_imagen['imagen']);*/ ?>' alt='imagen'>-->
-                                        
+
                                         <img class='w-100 rounded-circle mb-3 mb-sm-0' src='<?php echo $row_imagen['nuevaImagen']; ?>' alt='imagen'>
 
                                         <h5 class='menu-price'><?php echo "$" . $fila_articulos['precio_venta']; ?></h5>

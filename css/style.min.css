@@ -1839,12 +1839,12 @@ pre code {
 .table td {
     padding: .75rem;
     vertical-align: top;
-    border-top: 1px solid green
+    border-top: 1px solid #FFF
 }
 
 .table thead th {
     vertical-align: bottom;
-    border-bottom: 2px solid blue
+    border-bottom: 2px solid #1B1A55
 }
 
 .table tbody+tbody {
@@ -10833,8 +10833,8 @@ h6,
 .reservation,
 .page-header,
 .offer,
-.footer {
-    background: linear-gradient(rgba(22, 121, 171, 0.9), rgba(22, 121, 171, 0.9)), url(../img/bg.jpg);
+.footer {/*Parte de abajo*/
+    background: linear-gradient(rgba(12, 71, 211,0.67), rgba(247, 0, 0, 0.9)), url(../img/bg.jpg);
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover
