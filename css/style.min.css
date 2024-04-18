@@ -10834,7 +10834,7 @@ h6,
 .page-header,
 .offer,
 .footer {/*Parte de abajo*/
-    background: linear-gradient(rgba(91, 214, 224,0.7), rgba(16, 35, 225, 0.9)), url(../img/bg.jpg);
+    background: linear-gradient(rgba(59, 219, 76 ,0.7), rgba(16, 35, 225, 0.9)), url(../img/bg.jpg);
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover
