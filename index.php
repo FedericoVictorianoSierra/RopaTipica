@@ -109,18 +109,18 @@ if (isset($_SESSION['idusuario'])) {
                 <div class="carousel-item active">
                     <img class="w-100" src="img/Tlaxiaco.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <h2 class="text-primary font-weight-medium m-0">TRABAJANDO DESDE 1960</h2>
+                        <h2 class="text-primary font-weight-medium m-0">VISTE LA TRADICIÓN</h2>
                         <h1 class="display-1 text-white m-0">LA MIXTEQUITA</h1>
-                        <h2 class="text-white m-0">*BORDADOS DEL CORAZON *</h2>
+                        <h2 class="text-white m-0">CONECTA CON LA CULTURA</h2>
                     </div>
                 </div>
 
                 <div class="carousel-item ">
                     <img class="w-100" src="img/putla.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <h2 class="text-primary font-weight-medium m-0">TRABAJANDO DESDE 1960</h2>
+                        <h2 class="text-primary font-weight-medium m-0">UNIENDO MANOS</h2>
                         <h1 class="display-1 text-white m-0">LA MIXTEQUITA</h1>
-                        <h2 class="text-white m-0">* BORDADOS DEL CORAZON *</h2>
+                        <h2 class="text-white m-0">TEJIENDO TRADICIONES</h2>
                     </div>
 
 
@@ -145,13 +145,13 @@ if (isset($_SESSION['idusuario'])) {
         <div class="container">
             <div class="section-title">
                 <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">LA MIXTEQUITA</h4>
-                <h1 class="display-4">TRABAJANDO DESDE 1960</h1>
+                <h1 class="display-4">UNIENDO MANOS</h1>
             </div>
             <div class="row">
                 <div class="col-lg-4 py-0 py-lg-5">
-                    <h1 class="mb-3">PUTLA</h1>
+                    <h1 class="mb-3">RAÍCES Y CORAZÓN</h1>
                     <h5 class="mb-3">conoce un poco de tu consumo</h5>
-                    <p>El Huipil, era la prenda que comúnmente usaban las mujeres para cubrirse el torso. Esta consistía en una túnica suelta sin mangas con aberturas para la cabeza y los brazos; compuesta de dos o más lienzos añadidos. </p>
+                    <p>Haz clic en 'Comprar ahora' para adquirir estas piezas únicas de la Mixteca Oaxaqueña y contribuir al crecimiento y desarrollo de las comunidades artesanales locales.</p>
                     <a href="articulos.php" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">COMPRAR</a>
                 </div>
                 <div class="col-lg-4 py-5 py-lg-0" style="min-height: 500px;">
@@ -160,8 +160,8 @@ if (isset($_SESSION['idusuario'])) {
                     </div>
                 </div>
                 <div class="col-lg-4 py-0 py-lg-5">
-                    <h1 class="mb-3">Tlaxiaco</h1>
-                    <p>Durante el Posclásico tardío uno de los principales productos de tributo y comercio que los distintos señoríos de Mesoamérica debían entregar a la Triple Alianza consistía en textiles de diversas calidades, tanto blancos como con elaborados diseños.</p>
+                    <h1 class="mb-3">MODA CON ALMA</h1>
+                    <p> Dirígete al carrito para completar tu compra y apoyar a los talentosos artesanos de la Mixteca Oaxaqueña.</p>
 
 
                     <a href="carrito.php" class="btn btn-primary font-weight-bold py-2 px-4 mt-2">CARRITO</a>

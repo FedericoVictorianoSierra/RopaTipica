@@ -1832,23 +1832,23 @@ pre code {
 .table {
     width: 100%;
     margin-bottom: 1rem;
-    color: #555
+    color: red
 }
 
 .table th,
 .table td {
     padding: .75rem;
     vertical-align: top;
-    border-top: 1px solid #dee2e6
+    border-top: 1px solid green
 }
 
 .table thead th {
     vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6
+    border-bottom: 2px solid blue
 }
 
 .table tbody+tbody {
-    border-top: 2px solid #dee2e6
+    border-top: 2px solid yellow
 }
 
 .table-sm th,
@@ -1857,12 +1857,12 @@ pre code {
 }
 
 .table-bordered {
-    border: 1px solid #dee2e6
+    border: 1px solid red
 }
 
 .table-bordered th,
 .table-bordered td {
-    border: 1px solid #dee2e6
+    border: 1px solid #red
 }
 
 .table-bordered thead th,

@@ -77,7 +77,6 @@ if (mysqli_num_rows($result) == 1) { // Verificar si la consulta devolvió exact
                 <li><i class="icono fas fa-map-marker-alt"></i> Estado: <?php echo $Estado ?></li>
                 <li><i class="icono fas fa-map-marker-alt"></i> Ciudad: <?php echo $Ciudad ?></li>
                 <li><i class="icono fas fa-map-marker-alt"></i> Codigo Postal: <?php echo $CodigoP ?></li>
-                <li><i class="icono fas fa-share-alt"></i><a href="correo.php"> Solicitar ayuda </a></li>
                 <form method='post'>
                     <li>
                         <a class="btn btn-warning" href="actualizarperfil.php"><i class="fa fa-edit"></i></a>

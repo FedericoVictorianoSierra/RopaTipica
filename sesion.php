@@ -139,9 +139,14 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
                 <label class="frm">Contraseña: </label>
                 <input type="password" placeholder="contraseña" name="password" required="required" />
                 <button id="loginBtn" type="submit" name="login">Iniciar sesión</button>
+
+                <!-- Agregar el enlace para recuperar contraseña -->
+                <a href="recuperarDatos.php">Recuperar contraseña</a>
+
               </form>
             </div>
           </li>
+          
           <li>
             <input id="tab2" type="radio" name="tabs" />
             <label class="nav" for="tab2">Registro</label>
@@ -192,7 +197,7 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
                 <input type="text" placeholder="Colonia Falsa" minlength="6" maxlength="128" name="colonia" required="required" onkeypress="return soloLetras(event)">
 
                 <label class="frm">Calle:</label>
-                <input type="text" placeholder="Avenida Falsa" minlength="6" maxlength="128" name="calle" required="required" onkeypress="return soloLetras(event)">
+                <input type="text" placeholder="Calle Falsa 123" minlength="6" maxlength="128" name="calle" required="required" onkeypress="return soloLetras(event)">
 
                 <!--
                 <label class="frm">Número:</label>
