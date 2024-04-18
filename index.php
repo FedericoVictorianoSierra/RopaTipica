@@ -215,8 +215,8 @@ if (isset($_SESSION['idusuario'])) {
             </div>
         </div>
         <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
-            <p class="mb-2 text-white">MIXTEQUITAS &copy; <a class="font-weight-bold" href="#">BORDADOS DEL CORAZON</a></p>
-            <p class="m-0 text-white">EL BORDADO QUE NECESITAS <a class="font-weight-bold" href="#">MIXTEQUITA.COM</a></p>
+            <p class="mb-2 text-white">LA MIXTEQUITA &copy; <a class="font-weight-bold" href="#">COM</a>BORDADOS DEL CORAZON</a></p>
+            <p class="m-0 text-white">EL BORDADO QUE NECESITAS <a class="font-weight-bold" href="#">LA MIXTEQUITA.COM</a></p>
         </div>
     </div>
     <!-- Footer End -->
