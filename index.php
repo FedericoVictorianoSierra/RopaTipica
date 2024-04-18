@@ -109,7 +109,7 @@ if (isset($_SESSION['idusuario'])) {
                 <div class="carousel-item active">
                     <img class="w-100" src="img/Tlaxiaco.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <h2 class="text-primary font-weight-medium m-0">VISTE LA TRADICIÓN</h2>
+                        <h2 class="text-primary font-weight-bold m-0">VISTE LA TRADICIÓN</h2>
                         <h1 class="display-1 text-white m-0">LA MIXTEQUITA</h1>
                         <h2 class="text-white m-0">CONECTA CON LA CULTURA</h2>
                     </div>
@@ -118,7 +118,7 @@ if (isset($_SESSION['idusuario'])) {
                 <div class="carousel-item ">
                     <img class="w-100" src="img/putla.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <h2 class="text-primary font-weight-medium m-0">UNIENDO MANOS</h2>
+                        <h2 class="text-primary font-weight-bold m-0">UNIENDO MANOS</h2>
                         <h1 class="display-1 text-white m-0">LA MIXTEQUITA</h1>
                         <h2 class="text-white m-0">TEJIENDO TRADICIONES</h2>
                     </div>
