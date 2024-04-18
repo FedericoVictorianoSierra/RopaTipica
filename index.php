@@ -150,7 +150,7 @@ if (isset($_SESSION['idusuario'])) {
             <div class="row">
                 <div class="col-lg-4 py-0 py-lg-5">
                     <h1 class="mb-3">RAÍCES Y CORAZÓN</h1>
-                    <h5 class="mb-3">conoce un poco de tu consumo</h5>
+                    <h5 class="mb-3">Conoce un poco de tu consumo</h5>
                     <p>Haz clic en 'Comprar ahora' para adquirir estas piezas únicas de la Mixteca Oaxaqueña y contribuir al crecimiento y desarrollo de las comunidades artesanales locales.</p>
                     <a href="articulos.php" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">COMPRAR</a>
                 </div>
@@ -160,7 +160,7 @@ if (isset($_SESSION['idusuario'])) {
                     </div>
                 </div>
                 <div class="col-lg-4 py-0 py-lg-5">
-                    <h1 class="mb-3">MODA CON ALMA</h1>
+                    <h1 class="mb-3">MODA CON ALMA Y CORAZÓN</h1>
                     <p> Dirígete al carrito para completar tu compra y apoyar a los talentosos artesanos de la Mixteca Oaxaqueña.</p>
 
 
@@ -201,7 +201,7 @@ if (isset($_SESSION['idusuario'])) {
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">INFORMACIÓN</h4>
                 <p><i class="fa fa-map-marker-alt mr-2"></i>#23 DE CALLE ALDAMA TLAXIACO.OAXACA</p>
-                <p><i class="fa fa-phone-alt mr-2"></i>9539756822</p>
+                <p><i class="fa fa-phone-alt mr-2"></i>953-975-6822</p>
                 <p class="m-0"><i class="fa fa-envelope mr-2"></i>MIXTEQUITA@gmail.com</p>
             </div>
             <div class="col-lg-3 col-md-6 mb-5">
@@ -215,7 +215,7 @@ if (isset($_SESSION['idusuario'])) {
             </div>
         </div>
         <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
-            <p class="mb-2 text-white">MIXTEQUITAS &copy; <a class="font-weight-bold" href="#">COM</a>BORDADOS DEL CORAZON</a></p>
+            <p class="mb-2 text-white">MIXTEQUITAS &copy; <a class="font-weight-bold" href="#">BORDADOS DEL CORAZON</a></p>
             <p class="m-0 text-white">EL BORDADO QUE NECESITAS <a class="font-weight-bold" href="#">MIXTEQUITA.COM</a></p>
         </div>
     </div>
