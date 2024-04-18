@@ -152,7 +152,7 @@ if (isset($_SESSION['idusuario'])) {
                     <h1 class="mb-3">RAÍCES Y CORAZÓN</h1>
                     <h5 class="mb-3">Conoce un poco de tu consumo</h5>
                     <p>Haz clic en 'Comprar ahora' para adquirir estas piezas únicas de la Mixteca Oaxaqueña y contribuir al crecimiento y desarrollo de las comunidades artesanales locales.</p>
-                    <a href="articulos.php" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">COMPRAR</a>
+                    <a href="articulos.php" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">COMPRAR AHORA</a>
                 </div>
                 <div class="col-lg-4 py-5 py-lg-0" style="min-height: 500px;">
                     <div class="position-relative h-100">
