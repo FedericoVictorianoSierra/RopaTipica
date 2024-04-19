@@ -18,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha'])) {
     $sql = "SELECT idusuario, idcarrito, fecha, impuesto, total FROM venta";
 }
 
-
 //$sql = "SELECT idusuario, idcarrito, fecha, impuesto, total FROM venta";
 
 $result = mysqli_query($conexion, $sql);
@@ -74,6 +73,7 @@ $result = mysqli_query($conexion, $sql);
                                     <tr>
                                         <th>Fecha de compra</th>
                                         <th>Usuario</th>
+                                        <th>Dirección</th>
                                         <th>Imagen</th>
                                         <th>Código</th>
                                         <th>Artículos</th>
@@ -91,11 +91,27 @@ $result = mysqli_query($conexion, $sql);
                                         $total = $row['total'];
 
                                         // Realizar consulta para obtener el usuario asociada al idusuario
-                                        $query_usuario = "SELECT nombre FROM usuario WHERE idusuario= " . $row['idusuario'];
+                                        $query_usuario = "SELECT nombre, iddireccion FROM usuario WHERE idusuario= " . $row['idusuario'];
                                         $result_usuario = mysqli_query($conexion, $query_usuario);
                                         $row_usuario = mysqli_fetch_assoc($result_usuario);
 
                                         $usuarionombre = $row_usuario['nombre'];
+
+
+                                        $iddireccion = $row_usuario['iddireccion'];
+                                        // Realizar consulta para obtener la dirección asociada al ID de dirección del usuario
+                                        $query_direccion = "SELECT pais, estado, ciudad, colonia, calle, numcalle, codigopostal FROM direccion WHERE iddireccion = " . $iddireccion;
+                                        $result_direccion = mysqli_query($conexion, $query_direccion);
+                                        $row_direccion = mysqli_fetch_assoc($result_direccion);
+
+                                        // Almacenar la información de la dirección en variables
+                                        $Pais = $row_direccion['pais'];
+                                        $Estado = $row_direccion['estado'];
+                                        $Ciudad = $row_direccion['ciudad'];
+                                        $CodigoP = $row_direccion['codigopostal'];
+                                        $colonia = $row_direccion['colonia'];
+                                        $calle = $row_direccion['calle'];
+
 
                                         $idcarrito = $row['idcarrito'];
                                         $sqlcarrito = "SELECT * FROM carrito WHERE idcarrito = $idcarrito";
@@ -118,6 +134,11 @@ $result = mysqli_query($conexion, $sql);
 
                                             <td><?php echo $fecha; ?></td>
                                             <td><?php echo $usuarionombre; ?></td>
+                                            <td>
+
+                                                <i class="icono fas fa-map-marker-alt"></i> <?php echo $calle . ", " . $colonia . ", " . $Ciudad . ", " . $Estado. ", " . $CodigoP?>
+                                                <br>
+                                            </td>
                                             <td><img src='<?php echo $row_imagen['nuevaImagen']; ?>' alt='imagen' width='100'></td>
                                             <td><?php echo $rowarticulo['codigo']; ?></td>
                                             <td><?php echo $rowarticulo['nombre']; ?></td>
