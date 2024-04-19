@@ -66,6 +66,9 @@ $result = mysqli_query($conexion, $sql);
                     <div class="col-md-12">
                         <?php if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha']) && mysqli_num_rows($result) > 0) : ?>
                             <?php echo "<td><a class='btn btn-info' href='imprimirVentas.php?fecha=$fecha_seleccionada'><i class='fa fa-print'></i></a></td>"; ?>
+                        <?php endif; ?>
+                        <?php if (mysqli_num_rows($result) > 0) : ?>
+
                             <table class="table tabla1">
                                 <thead>
                                     <tr>
@@ -127,8 +130,8 @@ $result = mysqli_query($conexion, $sql);
                                     ?>
                                 </tbody>
                             </table>
-                        <?php elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha'])) : ?>
-                            <p>No se encontraron ventas para la fecha seleccionada.</p>
+                        <?php else : ?>
+                            <p>No se encontraron ventas.</p>
                         <?php endif; ?>
                     </div>
                 </div>
