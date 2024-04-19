@@ -1,39 +1,51 @@
 <?php
-session_start(); // Iniciar sesión
 
-// Verificar si se ha dado al botón de recuperar contraseña
-if (isset($_POST['recuperar'])) {
-    require("php_con/db.php"); // Incluir la conexión a la base de datos
-    $conexion = conexion(); // Crear la conexión
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-    // Obtener el correo electrónico ingresado
+require 'correo_electronico/vendor/autoload.php';
+
+// Configuración de Gmail 
+$mail = new PHPMailer(true);
+$mail->isSMTP();
+$mail->SMTPAuth   = true;
+$mail->SMTPSecure = 'ssl';
+$mail->Host       = 'smtp.gmail.com';
+$mail->Port       = 465;
+$mail->Username   = 'bautistalucy157@gmail.com';
+$mail->Password   = 'yylxiwmkumeyilqy';
+
+// Obtener los datos del formulario
+if (isset($_POST['correo'])) {
     $correo = $_POST['correo'];
 
     // Verificar si el correo electrónico existe en la base de datos
+    require("php_con/db.php"); // Incluir la conexión a la base de datos
+    $conexion = conexion(); // Crear la conexión
+
     $query = "SELECT * FROM usuario WHERE email='$correo'";
     $result = mysqli_query($conexion, $query);
 
     if (mysqli_num_rows($result) == 1) { // Si el correo electrónico existe
         $row = mysqli_fetch_assoc($result); // Obtener los datos del usuario
 
-        ini_set("SMTP", "smtp.example.com");
-        ini_set("smtp_port", "587");
+        // Detalles del correo electrónico
+        $mail->setFrom('bautistalucy157@gmail.com', 'RopaTipica');
+        $mail->addAddress($correo); // Correo electrónico del destinatario
+        $mail->Subject = "Recuperar Password";
+        $mail->Body    = "Tu contraseña es: " . $row['password'];
 
-        // Luego, puedes enviar el correo electrónico
-        $to = $correo;
-        $subject = "Recuperación de contraseña";
-        $message = "Tu contraseña es: " . $row['password'];
-        $headers = "From: tu_correo@example.com";
-
-        if (mail($to, $subject, $message, $headers)) {
+        // Envío del correo electrónico
+        if ($mail->send()) {
             echo "<script>alert('Se ha enviado un correo electrónico con tu contraseña.');</script>";
         } else {
             echo "<script>alert('Hubo un error al enviar el correo electrónico.');</script>";
         }
+    } else {
+        echo "<script>alert('No se encontró ningún usuario con este correo electrónico.');</script>";
     }
 }
 ?>
-
 
 <html lang="en">
 
@@ -63,7 +75,6 @@ if (isset($_POST['recuperar'])) {
                                 <button id="loginBtn" type="submit" name="recuperar">Recuperar contraseña</button>
                             </form>
                         </div>
-
                     </li>
 
                     <li>
@@ -87,7 +98,6 @@ if (isset($_POST['recuperar'])) {
 
             <script src="js/validacion.js"></script>
 
-
             <script>
                 // Obtener la etiqueta de la sesión por su ID
                 var sesionLabel = document.getElementById("sesionLabel");
@@ -99,6 +109,8 @@ if (isset($_POST['recuperar'])) {
                 });
             </script>
 
+        </div>
+    </div>
 </body>
 
 </html>

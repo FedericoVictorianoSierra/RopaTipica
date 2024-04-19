@@ -141,7 +141,7 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
                 <button id="loginBtn" type="submit" name="login">Iniciar sesión</button>
 
                 <!-- Agregar el enlace para recuperar contraseña -->
-                <!--<a href="recuperarDatos.php">Recuperar contraseña</a>-->
+                <a href="recuperarDatos.php">Recuperar contraseña</a>
 
               </form>
             </div>
