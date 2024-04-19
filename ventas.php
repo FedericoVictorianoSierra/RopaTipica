@@ -74,6 +74,7 @@ $result = mysqli_query($conexion, $sql);
                                         <th>Fecha de compra</th>
                                         <th>Usuario</th>
                                         <th>Dirección</th>
+                                        <th>Teléfono</th>
                                         <th>Imagen</th>
                                         <th>Código</th>
                                         <th>Artículos</th>
@@ -91,13 +92,15 @@ $result = mysqli_query($conexion, $sql);
                                         $total = $row['total'];
 
                                         // Realizar consulta para obtener el usuario asociada al idusuario
-                                        $query_usuario = "SELECT nombre, iddireccion FROM usuario WHERE idusuario= " . $row['idusuario'];
+                                        $query_usuario = "SELECT nombre, iddireccion, telefono FROM usuario WHERE idusuario= " . $row['idusuario'];
                                         $result_usuario = mysqli_query($conexion, $query_usuario);
                                         $row_usuario = mysqli_fetch_assoc($result_usuario);
 
                                         $usuarionombre = $row_usuario['nombre'];
+                                        $telefono = $row_usuario['telefono'];
 
 
+                                        /*obtener direccion*/
                                         $iddireccion = $row_usuario['iddireccion'];
                                         // Realizar consulta para obtener la dirección asociada al ID de dirección del usuario
                                         $query_direccion = "SELECT pais, estado, ciudad, colonia, calle, numcalle, codigopostal FROM direccion WHERE iddireccion = " . $iddireccion;
@@ -134,11 +137,12 @@ $result = mysqli_query($conexion, $sql);
 
                                             <td><?php echo $fecha; ?></td>
                                             <td><?php echo $usuarionombre; ?></td>
+                                            <!-- mostrar Dierccion -->
                                             <td>
-
                                                 <i class="icono fas fa-map-marker-alt"></i> <?php echo $calle . ", " . $colonia . ", " . $Ciudad . ", " . $Estado. ", " . $CodigoP?>
                                                 <br>
                                             </td>
+                                            <td><?php echo $telefono; ?></td>
                                             <td><img src='<?php echo $row_imagen['nuevaImagen']; ?>' alt='imagen' width='100'></td>
                                             <td><?php echo $rowarticulo['codigo']; ?></td>
                                             <td><?php echo $rowarticulo['nombre']; ?></td>
