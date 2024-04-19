@@ -141,7 +141,7 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
                 <button id="loginBtn" type="submit" name="login">Iniciar sesión</button>
 
                 <!-- Agregar el enlace para recuperar contraseña -->
-                <a href="recuperarDatos.php">Recuperar contraseña</a>
+                <!--<a href="recuperarDatos.php">Recuperar contraseña</a>-->
 
               </form>
             </div>
@@ -173,7 +173,7 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
                 -->
 
                 <label class="frm">Teléfono:</label>
-                <input type="text" placeholder="953 123 45 67" name="telefono" required="required" minlength="10" maxlength="10" onkeypress="return soloNumeros(event)">
+                <input type="number" placeholder="953 123 45 67" name="telefono" required="required" minlength="10" maxlength="10" onkeypress="return soloNumeros(event)">
 
                 <label class="frm">E-mail:</label>
                 <input type="email" placeholder="usuario@gmail.com" name="email" required="required">
@@ -205,7 +205,7 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
                 -->
 
                 <label class="frm">Código postal:</label>
-                <input type="text" minlength="5" maxlength="5" placeholder="69000" name="codigopostal" required="required" maxlength="5" onkeypress="return soloNumeros(event)">
+                <input type="number" minlength="5" maxlength="5" placeholder="69000" name="codigopostal" required="required" maxlength="5" onkeypress="return soloNumeros(event)">
 
                 <label>Rol:</label>
                 <select name="roles">

@@ -99,7 +99,7 @@ if (isset($_POST['agregar_carrito'])) {
                             //$result_imagen = mysqli_query($conexion, $query_imagen);
                             //$row_imagen = mysqli_fetch_assoc($result_imagen);
 
-                            $query_imagen = "SELECT nuevaImagen FROM img WHERE id_imagen = " . $fila_articulos['id_imagen'];
+                            $query_imagen = "SELECT nuevaImagen, imagen FROM img WHERE id_imagen = " . $fila_articulos['id_imagen'];
                             $result_imagen = mysqli_query($conexion, $query_imagen);
                             $row_imagen = mysqli_fetch_assoc($result_imagen);
 

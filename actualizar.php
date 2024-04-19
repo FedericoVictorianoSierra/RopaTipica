@@ -50,7 +50,7 @@ if (isset($_POST['actualizar'])) {
     $articulo = mysqli_fetch_assoc($resultado_articulo);
 
     /// Se actualiza la imagen del articulo en la tabla img
-    $query_imagen = "UPDATE img SET nombre='$nombreimg',nuevaImagen='$imagen' WHERE Id_imagen='$articulo[id_imagen]'";
+    $query_imagen = "UPDATE img SET nombre='$nombreimg',imagen = NULL, nuevaImagen='$imagen' WHERE Id_imagen='$articulo[id_imagen]'";
     mysqli_query($conexion, $query_imagen);
     $idimagen = mysqli_insert_id($conexion);
 
