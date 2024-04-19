@@ -33,7 +33,7 @@ if (isset($_POST['correo'])) {
         $mail->setFrom('bautistalucy157@gmail.com', 'RopaTipica');
         $mail->addAddress($correo); // Correo electrónico del destinatario
         $mail->Subject = "Recuperar Password";
-        $mail->Body    = "Tu contraseña es: " . $row['password'];
+        $mail->Body    = "Tu usuario es: " . $row['nombreUsuario'] . ",           Tu contraseña es: " . $row['password'];
 
         // Envío del correo electrónico
         if ($mail->send()) {
