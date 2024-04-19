@@ -11,7 +11,7 @@ if (!isset($_SESSION['idusuario'])) {
 // El ID del usuario está disponible en $_SESSION['idusuario']
 $idusuario = $_SESSION['idusuario'];
 
-require("php_con\db.php"); // Incluir el archivo que contiene la función de conexión 
+require("php_con/db.php"); // Incluir el archivo que contiene la función de conexión 
 $conexion = conexion(); // Crear la conexión a la base de datos
 
 // Consulta SQL para recuperar los materiales
