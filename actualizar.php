@@ -126,16 +126,16 @@ if (!$resultado_categorias) {
             </select>
             <br>
             <label for="codigo">Código:</label>
-            <input class="px-4 me-sm-3" type="text" name="codigo" id="codigo" value="<?php echo $articulo['codigo']; ?>" required="required">
+            <input class="px-4 me-sm-3" minlength="8" maxlength="25" type="number" name="codigo" id="codigo" value="<?php echo $articulo['codigo']; ?>" required="required">
             <br>
             <label for="nombre">Nombre:</label>
             <input class="px-4 me-sm-3" type="text" name="nombre" id="nombre" value="<?php echo $articulo['nombre']; ?>" required="required">
             <br>
             <label for="precio_venta">Precio de venta:</label>
-            <input class="px-4 me-sm-3" type="number" name="precio_venta" id="precio_venta" value="<?php echo $articulo['precio_venta']; ?>" required="required">
+            <input class="px-4 me-sm-3" minlength="8" maxlength="25" type="number" name="precio_venta" id="precio_venta" value="<?php echo $articulo['precio_venta']; ?>" required="required">
             <br>
             <label for="existencia">Existencia:</label>
-            <input class="px-4 me-sm-3" type="number" name="existencia" id="existencia" value="<?php echo $articulo['existencia']; ?>" required="required">
+            <input class="px-4 me-sm-3" minlength="8" maxlength="25" type="number" name="existencia" id="existencia" value="<?php echo $articulo['existencia']; ?>" required="required">
             <br>
             <label for="descripcion">Descripción:</label>
             <textarea name="descripcion" id="descripcion" required="required"><?php echo $articulo['descripcion']; ?></textarea>

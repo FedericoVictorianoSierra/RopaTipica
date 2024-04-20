@@ -41,7 +41,7 @@ if (isset($_SESSION['idusuario'])) {
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.min.css" rel="stylesheet">
-    <link href = "css/cookies.css" rel = "stylesheet">
+    <link href="css/cookies.css" rel="stylesheet">
 </head>
 
 <body>
@@ -73,7 +73,7 @@ if (isset($_SESSION['idusuario'])) {
                     <?php } ?>
 
                     <a href="perfil.php" class="nav-item nav-link">PERFIL</a>
-                    
+
                     <?php
                     if (!isset($_SESSION['idusuario'])) {
                         //iniciar sesión
@@ -159,13 +159,18 @@ if (isset($_SESSION['idusuario'])) {
                         <img class="position-absolute w-100 h-100" src="img/about.jpg" style="object-fit: cover;">
                     </div>
                 </div>
+
                 <div class="col-lg-4 py-0 py-lg-5">
                     <h1 class="mb-3">MODA CON ALMA Y CORAZÓN</h1>
                     <p> Dirígete al carrito para completar tu compra y apoyar a los talentosos artesanos de la Mixteca Oaxaqueña.</p>
 
-
-                    <a href="carrito.php" class="btn btn-primary font-weight-bold py-2 px-4 mt-2">CARRITO</a>
+                    <?php
+                    if ($idrol == 1) { ?>
+                        <a href="carrito.php" class="btn btn-primary font-weight-bold py-2 px-4 mt-2">CARRITO</a>
+                    <?php  } ?>
+                    
                 </div>
+
             </div>
         </div>
     </div>

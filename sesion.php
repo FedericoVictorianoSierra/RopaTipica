@@ -45,16 +45,16 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
   $nombreUsuario = $_POST['nombreUsuario'];
   $password = $_POST['password'];
   $nombre = $_POST['nombre'];
-  $apellidoPat = /*$_POST['apellidoPat'];*/'';
-  $apellidoMat = /*$_POST['apellidoMat'];*/'';
+  $apellidoPat = /*$_POST['apellidoPat'];*/ '';
+  $apellidoMat = /*$_POST['apellidoMat'];*/ '';
   $telefono = $_POST['telefono'];
   $email = $_POST['email'];
-  $pais = /*$_POST['pais'];*/'';
+  $pais = /*$_POST['pais'];*/ '';
   $estado = $_POST['estado'];
   $ciudad = $_POST['ciudad'];
   $colonia = $_POST['colonia'];
   $calle = $_POST['calle'];
-  $numcalle = /*$_POST['numcalle'];*/'';
+  $numcalle = /*$_POST['numcalle'];*/ '';
   $codigopostal = $_POST['codigopostal'];
   $rol = $_POST['roles'];
 
@@ -146,23 +146,23 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
               </form>
             </div>
           </li>
-          
+
           <li>
             <input id="tab2" type="radio" name="tabs" />
             <label class="nav" for="tab2">Registro</label>
             <div class="tab-content">
               <form action="" method="POST" enctype="multipart/form-data">
                 <label class="frm">Nombre de usuario:</label>
-                <input type="text" placeholder="usuario" name="nombreUsuario" required="required">
+                <input type="text" minlength="8" maxlength="25" placeholder="usuario" name="nombreUsuario" required="required">
 
                 <label class="frm">Password:</label>
-                <input type="password" placeholder="contraseña" name="password" required="required">
+                <input type="password" minlength="8" maxlength="25" placeholder="contraseña" name="password" required="required">
 
                 <Br>
                 <Br>
 
                 <label class="frm">Nombre completo:</label>
-                <input type="text" minlength="10" maxlength="128" placeholder="Heidi Lucy Butista Sanjuan" name="nombre" required="required" onkeypress="return soloLetras(event)">
+                <input type="text" minlength="10" maxlength="128" placeholder="Heidi Lucy Butista Sanjuan" name="nombre" id="nombre" required="required" onkeypress="return soloLetras(event)">
 
                 <!-- 
                 <label class="frm">Apellido paterno:</label>
@@ -183,21 +183,21 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
                 <input type="text" name="pais" required="required">
                 -->
 
-                <label >Estado:</label>
+                <label>Estado:</label>
                 <select id="estado" name="estado" required>
-                    <!-- Opciones de estado se cargarán dinámicamente -->
+                  <!-- Opciones de estado se cargarán dinámicamente -->
                 </select>
 
-                <label >Ciudad:</label>
+                <label>Municipio:</label>
                 <select id="municipio" name="ciudad" required>
-                    <!-- Opciones de ciudad se cargarán dinámicamente -->
+                  <!-- Opciones de ciudad se cargarán dinámicamente -->
                 </select>
 
                 <label class="frm">Colonia:</label>
                 <input type="text" placeholder="Colonia Falsa" minlength="6" maxlength="128" name="colonia" required="required" onkeypress="return soloLetras(event)">
 
                 <label class="frm">Calle:</label>
-                <input type="text" placeholder="Calle Falsa 123" minlength="6" maxlength="128" name="calle" required="required" onkeypress="return soloLetras(event)">
+                <input type="text" placeholder="Calle Falsa 123" minlength="6" maxlength="128" name="calle" required="required">
 
                 <!--
                 <label class="frm">Número:</label>
@@ -218,25 +218,37 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
                 <label>Foto:</label>
                 <input type="file" name="foto_" id="foto" required="required" accept="image/png, image/jpeg, image/jpg">
 
-                <input id="loginBtn" type="submit" value="Registrar usuario" name="crear">
+                <input id="loginBtn" onclick="validar(event)" type="submit" value="Registrar usuario" name="crear">
               </form>
             </div>
           </li>
         </ul>
       </div>
       <script src="js/jquery.min.js"></script>
-      
-       <!--Selecctor de municipio y ciudad -->
+
+      <!--Selecctor de municipio y ciudad -->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="js/municipios.js"></script>
-    <script type="text/javascript" src="js/select_estados.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
+      <script type="text/javascript" src="js/municipios.js"></script>
+      <script type="text/javascript" src="js/select_estados.js"></script>
+      <script type="text/javascript">
+        $(document).ready(function() {
           $('select').material_select();
         });
-    </script>
+      </script>
 
-<script src="js/validacion.js"></script>
+<script>
+  function validar(evt) {
+    var exp = /^[A-Za-z]+\s[A-Za-z]+\s[A-Za-z]+$/;
+    var nombre = document.getElementById("nombre").value.trim(); // Elimina espacios en blanco al principio y al final
+
+    if (!exp.test(nombre)) {
+      alert("Nombre inválido. Por favor, ingresa un nombre con al menos un nombre y dos apellidos.");
+      evt.preventDefault(); // Solo evita el envío del formulario si el nombre es inválido
+    }
+  }
+</script>
+
+      <script src="js/validacion.js"></script>
 
 </body>
 

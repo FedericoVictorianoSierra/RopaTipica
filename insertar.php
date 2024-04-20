@@ -18,7 +18,7 @@ $conexion = conexion(); // Crear la conexión a la base de datos
 $categorias_query = "SELECT idcategoria, nombre FROM categoria";
 
 // Ejecutar la consulta
-$resultado_categorias = mysqli_query($conexion, $categorias_query);
+$resultado_categorias = mysqli_query($conexion, $categorias_query); 
 
 // Verificar si se encontraron categorías
 if (!$resultado_categorias) {
@@ -38,16 +38,12 @@ if (isset($_POST['crear'])) {
     $descripcion = $_POST['descripcion'];
     $talla = $_POST['talla'];
     $modelo = $_POST['modelo'];
+    $imagen = $_POST['foto_'];
 
-    if (isset($_FILES['foto_'])) { // Se comprueba que se haya subido una foto
-        $nombreimg = basename($_FILES['foto_']['name']); // Se obtiene el nombre de la imagen
-        $imagen = addslashes(file_get_contents($_FILES['foto_']['tmp_name'])); // Se obtiene el contenido binario de la imagen
-        $tip = exif_imagetype($_FILES['foto_']['tmp_name']); //Se obtiene el tipo de imagen
-        $extension = image_type_to_extension($tip); // Se obtiene la extensión de la imagen
-    }
+    /// Se actualiza la imagen del articulo en la tabla img
+    $query_imagen = "INSERT INTO img(nuevaImagen) VALUES ('$imagen')";
 
     // Se inserta la imagen del usuario en la tabla img
-    $query_imagen = "INSERT INTO img(nombre,imagen, Tipo) VALUES ('$nombreimg','$imagen','$extension')";
     mysqli_query($conexion, $query_imagen);
     $idimagen = mysqli_insert_id($conexion);
 
@@ -89,16 +85,16 @@ if (isset($_POST['crear'])) {
             </select>
             <br>
             <label for="codigo">Código:</label>
-            <input class="px-4 me-sm-3" type="text" name="codigo" id="codigo" required="required">
+            <input class="px-4 me-sm-3" minlength="8" maxlength="25" type="number" name="codigo" id="codigo" required="required">
             <br>
             <label for="nombre">Nombre:</label>
             <input class="px-4 me-sm-3" type="text" name="nombre" id="nombre" required="required">
             <br>
             <label for="precio_venta">Precio de venta:</label>
-            <input class="px-4 me-sm-3" type="number" name="precio_venta" id="precio_venta" required="required">
+            <input class="px-4 me-sm-3" minlength="8" maxlength="25" type="number" name="precio_venta" id="precio_venta" required="required">
             <br>
             <label for="existencia">Existencia:</label>
-            <input class="px-4 me-sm-3" type="number" name="existencia" id="existencia" required="required">
+            <input class="px-4 me-sm-3" minlength="8" maxlength="25" type="number" name="existencia" id="existencia" required="required">
             <br>
             <label for="descripcion">Descripción:</label>
             <textarea class="px-4 me-sm-3" name="descripcion" id="descripcion" required="required"></textarea>
@@ -109,8 +105,12 @@ if (isset($_POST['crear'])) {
             <label class="m" for="modelo">Modelo:</label>
             <input class="px-4 me-sm-3" type="text" name="modelo" id="modelo" required="required">
             <br>
-            <label for="foto_">Imagen:</label>
-            <input class="px-4 me-sm-3" type="file" name="foto_" id="foto_" required="required" accept="image/png, image/jpeg, image/jpg">
+            
+            <label for="foto_">URL Foto:</label>
+            <!--<input class="px-4 me-sm-3" type="file" name="foto_" id="foto_">-->
+
+            <input class="px-4 me-sm-3" type="text" name="foto_" id="foto_" required="required">
+
             <br>
             <input class="btn btn-secondary font-weight-bold py-2 px-4 mt-2" type="submit" name="crear" value="Crear artículo">
         </form>

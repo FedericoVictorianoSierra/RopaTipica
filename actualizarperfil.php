@@ -96,23 +96,35 @@ if (!$resultado_rol) {
 
             <br>
             <label for="nombre">Nombre:</label>
-            <input class="px-4 me-sm-3" type="text" name="nombre" id="nombre" value="<?php echo $usuario['nombre']; ?>" required="required">
+            <input class="px-4 me-sm-3" minlength="8" maxlength="25" type="text" name="nombre" id="nombre" value="<?php echo $usuario['nombre']; ?>" required="required">
             <br>
             <label for="nombreUsuario">Nombre usuario:</label>
-            <input name="nombreUsuario" type="text" id="nombreUsuario" value="<?php echo $usuario['nombreUsuario']; ?>" required="required">
+            <input name="nombreUsuario" minlength="8" maxlength="25" type="text" id="nombreUsuario" value="<?php echo $usuario['nombreUsuario']; ?>" required="required">
             <br>
             <label for="password">Contraseña:</label>
-            <input name="password" type="password" id="password" value="<?php echo $usuario['password']; ?>" required="required">
-            <br>
+            <input name="password" minlength="8" maxlength="25" type="password" id="password" value="<?php echo $usuario['password']; ?>" required="required">
+            <br> 
             <label for="correo">Correo:</label>
             <input name="correo" type="email" id="correo" value="<?php echo $usuario['email']; ?>" required="required">
             <br>
             <label for="foto_">Foto:</label>
             <input class="px-4 me-sm-3" type="file" name="foto_" id="foto_">
             <br>
-            <input class="btn btn-secondary font-weight-bold py-2 px-4 mt-2" type="submit" name="actualizar" value="Actualizar">
+            <input class="btn btn-secondary font-weight-bold py-2 px-4 mt-2" type="submit" name="actualizar" onclick="validar(event)" value="Actualizar">
         </form>
     </div>
 </div>
+
+<script>
+  function validar(evt) {
+    var exp = /^[A-Za-z]+\s[A-Za-z]+\s[A-Za-z]+$/;
+    var nombre = document.getElementById("nombre").value.trim(); // Elimina espacios en blanco al principio y al final
+
+    if (!exp.test(nombre)) {
+      alert("Nombre inválido. Por favor, ingresa un nombre con al menos un nombre y dos apellidos y sin números.");
+      evt.preventDefault(); // Solo evita el envío del formulario si el nombre es inválido
+    }
+  }
+</script>
 <?php include_once "pie.php" ?>
 <?php include_once "ventana.php" ?>
