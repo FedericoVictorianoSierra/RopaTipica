@@ -99,7 +99,7 @@ if (!$resultado_rol) {
             <input class="px-4 me-sm-3" minlength="8" maxlength="25" type="text" name="nombre" id="nombre" value="<?php echo $usuario['nombre']; ?>" required="required">
             <br>
             <label for="nombreUsuario">Nombre usuario:</label>
-            <input name="nombreUsuario" minlength="8" maxlength="25" type="text" id="nombreUsuario" value="<?php echo $usuario['nombreUsuario']; ?>" required="required">
+            <input name="nombreUsuario" minlength="6" maxlength="25" type="text" id="nombreUsuario" value="<?php echo $usuario['nombreUsuario']; ?>" required="required">
             <br>
             <label for="password">Contraseña:</label>
             <input name="password" minlength="8" maxlength="25" type="password" id="password" value="<?php echo $usuario['password']; ?>" required="required">

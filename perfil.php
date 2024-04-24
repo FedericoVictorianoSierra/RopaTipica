@@ -51,10 +51,9 @@ if (mysqli_num_rows($result) == 1) { // Verificar si la consulta devolvió exact
     <div class="perfil-usuario-header">
         <div class="perfil-usuario-portada">
             <div class="perfil-usuario-avatar">
-                <img src="<?php echo $imagen_base64; ?>" alt="img-avatar">
-                <button type="button" class="boton-avatar">
-                    <i class="far fa-image"></i>
-                </button>
+                <div class="imagen-avatar">
+                    <img src="<?php echo $imagen_base64; ?>" alt="img-avatar">
+                </div>
             </div>
 
         </div>

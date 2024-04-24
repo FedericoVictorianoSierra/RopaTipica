@@ -1070,7 +1070,7 @@ var municipios = {
                         "Guelatao de Juárez",
                         "Guevea de Humboldt",
                         "Heroica Ciudad de Ejutla de Crespo",
-                        "Heroica Ciudad de Huajuapan de Leó",
+                        "Heroica Ciudad de Huajuapan de León",
                         "Heroica Ciudad de Tlaxiaco",
                         "Huautepec",
                         "Huautla de Jiménez",

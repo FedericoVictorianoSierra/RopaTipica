@@ -153,7 +153,7 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
             <div class="tab-content">
               <form action="" method="POST" enctype="multipart/form-data">
                 <label class="frm">Nombre de usuario:</label>
-                <input type="text" minlength="8" maxlength="25" placeholder="usuario" name="nombreUsuario" required="required">
+                <input type="text" minlength="6" maxlength="25" placeholder="usuario" name="nombreUsuario" required="required">
 
                 <label class="frm">Password:</label>
                 <input type="password" minlength="8" maxlength="25" placeholder="contraseña" name="password" required="required">
