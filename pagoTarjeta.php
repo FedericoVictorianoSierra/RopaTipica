@@ -24,6 +24,7 @@ $result = mysqli_stmt_get_result($stmt);
 if (mysqli_num_rows($result) == 1) {
   $row = mysqli_fetch_assoc($result);
   $nombreusuario = $row['nombreUsuario'];
+  $nombre = $row['nombre'];
 }
 
 // Obtener los registros del carrito del usuario
@@ -135,7 +136,7 @@ if (isset($_POST['accion']) && $_POST['accion'] == 'comprar') {
       <label>Número de tarjeta:</label>
       <input type="number" id="user" class="input cardnumber" placeholder="1234 5678 9101 1121" minlength="16" maxlength="16" onkeypress="return soloNumeros(event)" required>
       <label>Nombre:</label>
-      <input id="nombre" class="input name" value='<?php echo $nombreusuario ?>' type="text" onkeypress="return soloLetras(event)" required>
+      <input id="nombre" class="input name" value='<?php echo $nombre ?>' type="text" onkeypress="return soloLetras(event)" required>
       <label class="toleft">CCV:</label>
       <input type="number" id="ccv" class="input toleft ccv" placeholder="321" minlength="3" maxlength="3" onkeypress="return soloNumeros(event)" required>
     </form>

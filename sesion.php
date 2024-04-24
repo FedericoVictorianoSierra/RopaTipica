@@ -236,17 +236,17 @@ if (isset($_POST['crear'])) { // Se verifica si se envió el formulario de regis
         });
       </script>
 
-<script>
-  function validar(evt) {
-    var exp = /^[A-Za-z]+\s[A-Za-z]+\s[A-Za-z]+$/;
-    var nombre = document.getElementById("nombre").value.trim(); // Elimina espacios en blanco al principio y al final
+      <script>
+        function validar(evt) {
+          var exp = /^[A-Za-z]+\s[A-Za-z]+\s[A-Za-z]+$/;
+          var nombre = document.getElementById("nombre").value.trim(); // Elimina espacios en blanco al principio y al final
 
-    if (!exp.test(nombre)) {
-      alert("Nombre inválido. Por favor, ingresa un nombre con al menos un nombre y dos apellidos.");
-      evt.preventDefault(); // Solo evita el envío del formulario si el nombre es inválido
-    }
-  }
-</script>
+          if (!exp.test(nombre)) {
+            alert("Nombre inválido. Por favor, ingresa un nombre con al menos un nombre y dos apellidos.");
+            evt.preventDefault(); // Solo evita el envío del formulario si el nombre es inválido
+          }
+        }
+      </script>
 
       <script src="js/validacion.js"></script>
 
