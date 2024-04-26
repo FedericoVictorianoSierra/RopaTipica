@@ -1,15 +1,17 @@
 <?php
 $idusuario = "";
 include 'conexion.php';
-
+include 'consultas.php';
 
 // Comprobar si se ha enviado el formulario de agregar al carrito
 if (isset($_POST['agregar_carrito'])) {
     $idarticulo = $_POST['idarticulo']; // Obtener el ID del artículo a agregar
     $cantidad = $_POST['cantidad']; // Obtener la cantidad del artículo a agregar
+    $idtalla = $_POST['idtalla_']; // Obtener la cantidad del artículo a agregar
 
-    // Consulta SQL para verificar si ya existe una fila en la tabla de carrito con la misma ID de artículo y carrito activo
-    $sql_verificar = "SELECT * FROM carrito WHERE idarticulo = $idarticulo AND idusuario = $idusuario AND activo = 1";
+    // Consulta SQL para verificar si ya existe una fila en la tabla de carrito con la misma ID de artículo, talla y carrito activo
+    $sql_verificar = "SELECT * FROM carrito WHERE idarticulo = $idarticulo AND idusuario = $idusuario AND idtalla = $idtalla AND activo = 1";
+
     $result_verificar = mysqli_query($conexion, $sql_verificar);
 
     if (mysqli_num_rows($result_verificar) > 0) { // Si ya existe una fila en la tabla de carrito con la misma ID de artículo y el carrito está activo
@@ -27,8 +29,10 @@ if (isset($_POST['agregar_carrito'])) {
         $sql_actualizar = "UPDATE carrito SET cantidad = $cantidad_nueva WHERE idcarrito = $idcarrito";
         mysqli_query($conexion, $sql_actualizar); // Ejecutar la consulta SQL
     } else { // Si no existe una fila en la tabla de carrito con la misma ID de artículo y carrito activo
+
         // Insertar una nueva fila en la tabla de carrito
-        $sql_insertar = "INSERT INTO carrito (idarticulo, idusuario, cantidad, activo) VALUES ($idarticulo, $idusuario, $cantidad, '1')";
+        $sql_insertar = "INSERT INTO carrito (idarticulo, idusuario, cantidad, activo, idtalla) VALUES ($idarticulo, $idusuario, $cantidad, '1', $idtalla)";
+
         mysqli_query($conexion, $sql_insertar);
     }
 
@@ -65,9 +69,8 @@ if (isset($_POST['agregar_carrito'])) {
             ?>
 
             <?php
-            // Obtener todas las categorías
-            $query_categorias = "SELECT * FROM categoria";
-            $resultado_categorias = mysqli_query($conexion, $query_categorias);
+            // Ejemplo de uso de función de consulta
+            $resultado_categorias = obtenerTodasLasCategorias($conexion);
 
             // Recorrer todas las categorías
             while ($fila_categorias = mysqli_fetch_assoc($resultado_categorias)) {
@@ -84,8 +87,13 @@ if (isset($_POST['agregar_carrito'])) {
 
                     </div>
                     <?php
-                    // Obtener los artículos de la categoría actual
-                    $query_articulos = "SELECT * FROM articulo WHERE idcategoria = " . $fila_categorias['idcategoria'];
+
+                    // si es el provedor solo mostrarle sus articulos
+                    if ($idrol == 2) {
+                        $query_articulos = "SELECT * FROM articulo WHERE idcategoria = " . $fila_categorias['idcategoria'] . " AND idprovedor = $idusuario";
+                    } else {
+                        $query_articulos = "SELECT * FROM articulo WHERE idcategoria = " . $fila_categorias['idcategoria'];
+                    }
                     $resultado_articulos = mysqli_query($conexion, $query_articulos);
 
                     // Mostrar los artículos de la categoría actual
@@ -95,14 +103,9 @@ if (isset($_POST['agregar_carrito'])) {
                         // Recorrer todos los artículos de la categoría actual
                         while ($fila_articulos = mysqli_fetch_assoc($resultado_articulos)) {
                             // Obtener la imagen del artículo actual
-                            //$query_imagen = "SELECT imagen FROM img WHERE id_imagen = " . $fila_articulos['id_imagen'];
-                            //$result_imagen = mysqli_query($conexion, $query_imagen);
-                            //$row_imagen = mysqli_fetch_assoc($result_imagen);
-
                             $query_imagen = "SELECT nuevaImagen, imagen FROM img WHERE id_imagen = " . $fila_articulos['id_imagen'];
                             $result_imagen = mysqli_query($conexion, $query_imagen);
                             $row_imagen = mysqli_fetch_assoc($result_imagen);
-
 
                             // Mostrar cada artículo en su respectiva columna
                         ?>
@@ -111,19 +114,46 @@ if (isset($_POST['agregar_carrito'])) {
                                     <div class='col-4 col-sm-3'>
 
                                         <!-- Mostrar la imagen del artículo actual -->
-                                        <!--<img class='w-100 rounded-circle mb-3 mb-sm-0' src='data:image/jpeg;base64,<?php /*echo base64_encode($row_imagen['imagen']);*/ ?>' alt='imagen'>-->
-
                                         <img class='w-100 rounded-circle mb-3 mb-sm-0' src='<?php echo $row_imagen['nuevaImagen']; ?>' alt='imagen'>
 
                                         <h5 class='menu-price'><?php echo "$" . $fila_articulos['precio_venta']; ?></h5>
                                     </div>
+
+
+
                                     <div class='col-8 col-sm-9'>
                                         <!-- Mostrar los datos del artículo actual -->
                                         <h4><?php echo $fila_articulos['nombre']; ?></h4>
                                         <p><?php echo $fila_articulos['descripcion']; ?></p>
-                                        <p>Talla: <?php echo $fila_articulos['talla']; ?></p>
+
+                                        <!-- Mostrar el selector de tallas según la existencia en cada talla -->
+                                        <?php
+                                        // Consulta SQL para obtener las tallas disponibles según la existencia en la tabla existencia
+                                        $query_tallas = "SELECT t.idtalla, t.nombre, e.existencia 
+                                                FROM talla t 
+                                                INNER JOIN existencia e ON t.idtalla = e.id_talla 
+                                                WHERE e.id_articulo = " . $fila_articulos['idarticulo'];
+
+                                        $resultado_tallas = mysqli_query($conexion, $query_tallas);
+
+                                        // Declarar un arreglo para almacenar las tallas
+                                        $tallas_disponibles = array();
+
+
+                                        ?>
+
+
                                         <p>Modelo: <?php echo $fila_articulos['modelo']; ?></p>
-                                        <p>Existencia: <?php echo $fila_articulos['existencia']; ?></p>
+                                        <p>Existencias:
+                                            <?php
+                                            // Obtener la existencia del artículo actual
+                                            $query_existencia = "SELECT SUM(existencia) AS total_existencia FROM existencia WHERE id_articulo = " . $fila_articulos['idarticulo'];
+                                            $resultado_existencia = mysqli_query($conexion, $query_existencia);
+                                            $fila_existencia = mysqli_fetch_assoc($resultado_existencia);
+                                            echo $fila_existencia['total_existencia'];
+                                            ?>
+                                        </p>
+
 
 
                                         <?php
@@ -131,22 +161,75 @@ if (isset($_POST['agregar_carrito'])) {
                                             <!-- Formulario para agregar el artículo al carrito -->
                                             <form method='post'>
                                                 <input type='hidden' name='idarticulo' value='<?php echo $fila_articulos['idarticulo']; ?>'>
-                                                <input class='btn btn-primary btn-lg px-4 me-sm-3' type='number' name='cantidad' value='1' min='1' max='<?php echo $fila_articulos['existencia']; ?>'>
-                                                <button class='btn btn-primary btn-lg px-4 me-sm-3' type='submit' name='agregar_carrito'>Agregar al carrito</button>
+
+                                                <input class='btn btn-primary btn-lg px-4 me-sm-3' type='number' name='cantidad' value='1' min='1' max='<?php echo $fila_existencia['total_existencia']; ?>' id='cantidad_input'>
+
+                                                <?php
+
+                                                // Mostrar el selector de tallas según la existencia en cada talla
+                                                if (mysqli_num_rows($resultado_tallas) > 0) {
+                                                    echo "<label for='talla'>Talla:</label>";
+                                                    echo "<select name='idtalla_'  id='idtalla_'>";
+
+                                                    // Iterar sobre las tallas disponibles
+                                                    while ($fila_tallas = mysqli_fetch_assoc($resultado_tallas)) {
+                                                        if ($fila_tallas['existencia'] > 0) {
+                                                            // Mostrar la opción de talla con su respectiva existencia
+                                                            echo "<option value='" . $fila_tallas['idtalla'] . "' data-existencia='" . $fila_tallas['existencia'] . "'>" . $fila_tallas['nombre'] . " (Existencia: " . $fila_tallas['existencia'] . ")" . "</option>";
+                                                            // Agregar el idtalla al arreglo de tallas disponibles
+                                                            $tallas_disponibles[] = $fila_tallas['idtalla'];
+                                                        }
+                                                    }
+
+                                                    echo "</select>";
+                                                    echo "<br>";
+                                                    echo "<br>";
+                                                } else {
+                                                    echo "<p>No hay tallas disponibles para este artículo.</p>";
+                                                }
+                                                ?>
+
+
+                                                <br>
+                                                <br>
+
+
+                                                <button class='btn btn-primary btn-lg px-4 me-sm-3' type='submit' name='agregar_carrito'><i class="fa fa-cart-plus"></i></button>
                                             </form>
                                         <?php } ?>
 
                                         <?php
                                         // Mostrar el botón solo si el valor de idrol es igual a 2
                                         if ($idrol == 2) { ?>
+
+
+
+
                                             <form method='post'>
                                                 <?php $id = $fila_articulos['idarticulo'] ?>
                                                 <input type='hidden' name='idarticulo' value='<?php echo $fila_articulos['idarticulo']; ?>'>
                                                 <a class="btn btn-warning" href="actualizar.php?id=<?php echo $fila_articulos['idarticulo']; ?>"><i class="fa fa-edit"></i></a>
-                                                <a class="btn btn-danger" href="eliminar.php?id=<?php echo $fila_articulos['idarticulo']; ?>"><i class="fa fa-trash"></i></a>
+
+                                                <a class="btn btn-danger" href="#" onclick="confirmarEliminacion(<?php echo $fila_articulos['idarticulo']; ?>);"><i class="fa fa-trash"></i></a>
+
+                                                <script>
+                                                    function confirmarEliminacion(idArticulo) {
+                                                        if (confirm("¿Estás seguro de que deseas eliminar este artículo?")) {
+                                                            // Si el usuario confirma la eliminación, redirigir a la página de eliminación
+                                                            window.location.href = "eliminar.php?id=" + idArticulo;
+                                                        } else {
+                                                            // Si el usuario cancela, no hacer nada
+                                                            // Opcionalmente, puedes redirigir a la página de artículos.php aquí si lo deseas
+                                                        }
+                                                    }
+                                                </script>
+
                                             </form>
 
-                                        <?php } ?>
+                                        <?php
+
+
+                                        } ?>
                                     </div>
                                 </div>
                             </div>
@@ -167,38 +250,8 @@ if (isset($_POST['agregar_carrito'])) {
 
 <?php include_once "pie.php" ?>
 
-<script>
-    // función que recibe el id de la categoría y enfoca hacia ella con una animación suave
-    function enfocarCategoria(idcategoria) {
-        // obtiene el elemento HTML de la categoría por su id
-        var el = document.getElementById("categoria-" + idcategoria);
-        // aplica el efecto de animación de desplazamiento suave al elemento HTML
-        el.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start' // define la posición del elemento de referencia (el inicio del elemento enfocado) en relación con la ventana de visualización
-        });
-    }
-</script>
+<script src="js/scroll.js"></script>
 
 <script>
-    // Función para guardar la posición del scroll
-    function guardarPosicionScroll() {
-        localStorage.setItem('posicionScroll', window.pageYOffset);
-    }
 
-    // Función para restaurar la posición del scroll
-    function restaurarPosicionScroll() {
-        var posicionScroll = localStorage.getItem('posicionScroll');
-        if (posicionScroll) {
-            window.scrollTo(0, posicionScroll);
-            localStorage.removeItem('posicionScroll'); // Elimina la posición guardada para que no se restaure cada vez
-        }
-    }
-
-    // Guardar la posición del scroll cuando la página se esté cerrando o al realizar un evento de scroll
-    window.addEventListener('beforeunload', guardarPosicionScroll);
-    window.addEventListener('scroll', guardarPosicionScroll);
-
-    // Restaurar la posición del scroll cuando la página se carga
-    window.addEventListener('load', restaurarPosicionScroll);
 </script>

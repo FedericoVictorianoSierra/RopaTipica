@@ -18,7 +18,7 @@ $conexion = conexion(); // Crear la conexión a la base de datos
 $categorias_query = "SELECT idcategoria, nombre FROM categoria";
 
 // Ejecutar la consulta
-$resultado_categorias = mysqli_query($conexion, $categorias_query); 
+$resultado_categorias = mysqli_query($conexion, $categorias_query);
 
 // Verificar si se encontraron categorías
 if (!$resultado_categorias) {
@@ -26,17 +26,30 @@ if (!$resultado_categorias) {
     exit();
 }
 
+// Consulta SQL para recuperar las tallas
+$talla_query = "SELECT idtalla, nombre FROM talla";
+
+// Ejecutar la consulta
+$resultado_talla = mysqli_query($conexion, $talla_query);
+
+// Verificar si se encontraron tallas
+if (!$resultado_talla) {
+    echo "Error al recuperar las tallas: " . mysqli_error($conexion);
+    exit();
+}
+
+
 // Verificar si se ha enviado el formulario
 if (isset($_POST['crear'])) {
 
     // Obtener los valores del formulario
     $idcategoria = $_POST['idcategoria'];
+    $idtalla = $_POST['idtalla'];
     $codigo = $_POST['codigo'];
     $nombre = $_POST['nombre'];
     $precio_venta = $_POST['precio_venta'];
     $existencia = $_POST['existencia'];
     $descripcion = $_POST['descripcion'];
-    $talla = $_POST['talla'];
     $modelo = $_POST['modelo'];
     $imagen = $_POST['foto_'];
 
@@ -47,17 +60,32 @@ if (isset($_POST['crear'])) {
     mysqli_query($conexion, $query_imagen);
     $idimagen = mysqli_insert_id($conexion);
 
-    // Insertar los datos en la tabla articulo
-    $sql = "INSERT INTO articulo (idcategoria, codigo, nombre, precio_venta, existencia, descripcion, talla, modelo, id_imagen) VALUES ('$idcategoria', '$codigo', '$nombre', '$precio_venta', '$existencia', '$descripcion', '$talla', '$modelo', '$idimagen')";
-    if (mysqli_query($conexion, $sql)) {
-        $textoModal = "Los datos se han insertado correctamente.";
-        $mostrarModal = true;
-        $nombreArchivo = "insertar.php";
-    } else {
-        $textoModal = "Error: " . $sql . "<br>" . mysqli_error($conexion);
-        $mostrarModal = true;
-        $nombreArchivo = "insertar.php";
-    }
+     // Insertar los datos en la tabla articulo
+     $sql = "INSERT INTO articulo (idcategoria, codigo, nombre, precio_venta, existencia, descripcion, modelo, id_imagen, idprovedor) VALUES ('$idcategoria', '$codigo', '$nombre', '$precio_venta', '$existencia', '$descripcion', '$modelo', '$idimagen','$idusuario')";
+    
+     // Ejecutar la consulta para insertar el artículo
+     if (mysqli_query($conexion, $sql)) {
+         // Obtener el ID del artículo recién insertado
+         $idarticulo = mysqli_insert_id($conexion);
+         
+         // Recorrer las selecciones de tallas y cantidades
+         foreach ($_POST['idtalla'] as $idtalla) {
+             $cantidad = $_POST['cantidad_' . $idtalla];
+             // Insertar los datos en la tabla de existencia
+             $query_existencia = "INSERT INTO existencia (id_articulo, id_talla, existencia) VALUES ('$idarticulo', '$idtalla', '$cantidad')";
+             mysqli_query($conexion, $query_existencia);
+         }
+         
+         $textoModal = "Los datos se han insertado correctamente.";
+         $mostrarModal = true;
+         $nombreArchivo = "insertar.php";
+     } else {
+         $textoModal = "Error: " . $sql . "<br>" . mysqli_error($conexion);
+         $mostrarModal = true;
+         $nombreArchivo = "insertar.php";
+     }
+
+    
 }
 
 
@@ -99,13 +127,22 @@ if (isset($_POST['crear'])) {
             <label for="descripcion">Descripción:</label>
             <textarea class="px-4 me-sm-3" name="descripcion" id="descripcion" required="required"></textarea>
             <br>
-            <label for="talla">Talla:</label>
-            <input class="px-4 me-sm-3" type="text" name="talla" id="talla" required="required">
+
+
+            <label>Talla:</label><br>
+            <?php while ($row = mysqli_fetch_array($resultado_talla)) : ?>
+                <div>
+                    <input type="checkbox" name="idtalla[]" id="idtalla_<?php echo $row['idtalla']; ?>" value="<?php echo $row['idtalla']; ?>">
+                    <label for="idtalla_<?php echo $row['idtalla']; ?>"><?php echo $row['nombre']; ?></label>
+                    <input type="number" name="cantidad_<?php echo $row['idtalla']; ?>" id="cantidad_<?php echo $row['idtalla']; ?>" min="0" value="0">
+                </div>
+            <?php endwhile; ?>
+
             <br>
             <label class="m" for="modelo">Modelo:</label>
             <input class="px-4 me-sm-3" type="text" name="modelo" id="modelo" required="required">
             <br>
-            
+
             <label for="foto_">URL Foto:</label>
             <!--<input class="px-4 me-sm-3" type="file" name="foto_" id="foto_">-->
 

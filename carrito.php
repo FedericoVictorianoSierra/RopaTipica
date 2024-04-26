@@ -61,6 +61,7 @@ while ($resultado = mysqli_fetch_array($registros)) {
                             <th>Nombre</th>
                             <th>Existencias</th>
                             <th>Precio c/u</th>
+                            <th>Talla</th>
                             <th>Cantidad</th>
                             <th>Sub Total</th>
                             <th></th>
@@ -71,6 +72,8 @@ while ($resultado = mysqli_fetch_array($registros)) {
                     $subtotal = 0; // Inicializar la variable subtotal en cero
                     foreach ($datos as $datos1) {
                         $sql = "SELECT * FROM articulo WHERE idarticulo = " . $datos1['idarticulo'];
+
+
                         $resultado = mysqli_query($conexion, $sql);
                         $articulo = mysqli_fetch_assoc($resultado);
 
@@ -93,6 +96,17 @@ while ($resultado = mysqli_fetch_array($registros)) {
                             <td><?php echo $articulo['nombre']; ?></td>
                             <td><?php echo $articulo['existencia']; ?></td>
                             <td><?php echo "$" . $articulo['precio_venta']; ?></td>
+
+
+                            <td><?php 
+                            
+                            $query = "SELECT * FROM talla WHERE idtalla = '{$datos1['idtalla']}'";
+                            $resultado = mysqli_query($conexion, $query);
+                            $row = mysqli_fetch_assoc($resultado);
+
+
+                            echo "" . $row['nombre'] ?></td>
+
                             <td><?php echo $datos1['cantidad']; ?></td>
                             <td><?php echo "$" . $precio_total; ?></td>
                             <td>

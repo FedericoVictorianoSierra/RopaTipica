@@ -6,19 +6,18 @@ include 'conexion.php';
 // Inicializar la variable $fecha_seleccionada
 $fecha_seleccionada = "";
 
-// Procesar el formulario si se envió
+// Consulta SQL para seleccionar las ventas del proveedor actual
+$sql = "SELECT v.idusuario, v.idcarrito, v.fecha, v.impuesto, v.total 
+        FROM venta v
+        INNER JOIN carrito c ON v.idcarrito = c.idcarrito
+        INNER JOIN articulo a ON c.idarticulo = a.idarticulo
+        WHERE a.idprovedor = $idusuario";
+
+// Si se envió una fecha en el formulario, agregar la condición para filtrar por fecha
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha'])) {
-    // Obtener la fecha del formulario
     $fecha_seleccionada = $_POST['fecha'];
-
-    // Consulta SQL para seleccionar las ventas por fecha (comparando solo la parte de la fecha excluyendo la de hora)
-    $sql = "SELECT idusuario, idcarrito, fecha, impuesto, total FROM venta WHERE DATE(fecha) = '$fecha_seleccionada'";
-} else {
-    // Consulta SQL predeterminada para seleccionar todas las ventas
-    $sql = "SELECT idusuario, idcarrito, fecha, impuesto, total FROM venta";
+    $sql .= " AND DATE(v.fecha) = '$fecha_seleccionada'";
 }
-
-//$sql = "SELECT idusuario, idcarrito, fecha, impuesto, total FROM venta";
 
 $result = mysqli_query($conexion, $sql);
 ?>
@@ -78,6 +77,7 @@ $result = mysqli_query($conexion, $sql);
                                         <th>Imagen</th>
                                         <th>Código</th>
                                         <th>Artículos</th>
+                                        <th>Talla</th>
                                         <th>Descripción</th>
                                         <th>Cantidad</th>
                                         <th>Total</th>
@@ -139,13 +139,23 @@ $result = mysqli_query($conexion, $sql);
                                             <td><?php echo $usuarionombre; ?></td>
                                             <!-- mostrar Dierccion -->
                                             <td>
-                                                <i class="icono fas fa-map-marker-alt"></i> <?php echo $calle . ", " . $colonia . ", " . $Ciudad . ", " . $Estado. ", " . $CodigoP?>
+                                                <i class="icono fas fa-map-marker-alt"></i> <?php echo $calle . ", " . $colonia . ", " . $Ciudad . ", " . $Estado . ", " . $CodigoP ?>
                                                 <br>
                                             </td>
                                             <td><?php echo $telefono; ?></td>
                                             <td><img src='<?php echo $row_imagen['nuevaImagen']; ?>' alt='imagen' width='100'></td>
                                             <td><?php echo $rowarticulo['codigo']; ?></td>
                                             <td><?php echo $rowarticulo['nombre']; ?></td>
+
+                                            <?php
+
+                                            //mostrar la talla en $row3['nombre']
+                                            $query3 = "SELECT * FROM talla WHERE idtalla = '{$rowcarrito['idtalla']}'";
+                                            $resultado3 = mysqli_query($conexion, $query3);
+                                            $row3 = mysqli_fetch_assoc($resultado3); ?>
+
+                                            <td><?php echo $row3['nombre']; ?></td>
+
                                             <td><?php echo $rowarticulo['descripcion']; ?></td>
                                             <td><?php echo $rowcarrito['cantidad']; ?></td>
                                             <td><?php echo "$" . $total; ?></td>
