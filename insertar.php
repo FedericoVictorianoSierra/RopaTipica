@@ -104,7 +104,7 @@ if (isset($_POST['crear'])) {
 <!-- Page Header End -->
 <div class="container-fluid py-5">
     <div class="container">
-        <form class="" action="" method="POST" enctype="multipart/form-data">
+        <form  id="miFormulario" class="" action="" method="POST" enctype="multipart/form-data">
             <label for="idcategoria">Categoría:</label>
             <select class="btn-primary btn-lg px-4 me-sm-3" name="idcategoria" id="idcategoria">
                 <?php while ($row = mysqli_fetch_array($resultado_categorias)) : ?>
@@ -134,7 +134,7 @@ if (isset($_POST['crear'])) {
                 <div>
                     <input type="checkbox" name="idtalla[]" id="idtalla_<?php echo $row['idtalla']; ?>" value="<?php echo $row['idtalla']; ?>">
                     <label for="idtalla_<?php echo $row['idtalla']; ?>"><?php echo $row['nombre']; ?></label>
-                    <input type="number" name="cantidad_<?php echo $row['idtalla']; ?>" id="cantidad_<?php echo $row['idtalla']; ?>" min="0" value="0">
+                    <input type="number" name="cantidad_<?php echo $row['idtalla']; ?>" id="cantidad_<?php echo $row['idtalla']; ?>" min="1" value="1">
                 </div>
             <?php endwhile; ?>
 
@@ -156,3 +156,16 @@ if (isset($_POST['crear'])) {
 
 <?php include_once "pie.php" ?>
 <?php include_once "ventana.php" ?>
+
+<script>
+    document.getElementById('miFormulario').addEventListener('submit', function(event) {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"][name="idtalla[]"]');
+        var checked = Array.prototype.slice.call(checkboxes).some(function(checkbox) {
+            return checkbox.checked;
+        });
+        if (!checked) {
+            alert("Por favor, seleccione al menos una talla.");
+            event.preventDefault();
+        }
+    });
+</script>

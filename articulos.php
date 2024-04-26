@@ -65,6 +65,16 @@ if (isset($_POST['agregar_carrito'])) {
             // Mostrar el botón "Nuevo" solo si el valor de idrol es igual a 2
             if ($idrol == 2) {
                 echo '<a class="btn btn-success" href="./insertar.php">Nuevo <i class="fa fa-plus"></i></a>';
+            } else {
+            ?>
+                <form method="get" action="">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Buscar artículo..." name="q" value="<?php echo isset($_GET['q']) ? $_GET['q'] : ''; ?>">
+                        <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+                    </div>
+                </form>
+
+            <?php
             }
             ?>
 
@@ -77,22 +87,36 @@ if (isset($_POST['agregar_carrito'])) {
                 // Mostrar título de la categoría con su respectivo identificador para el scroll
             ?>
                 <div class='container' id='categoria-<?php echo $fila_categorias['idcategoria']; ?>'>
-                    <div class='section-title'>
-                        <h4 class='text-primary text-uppercase' style='letter-spacing: 5px;'>Artículos principales</h4>
-                        <h1 class='display-4'><?php echo $fila_categorias['nombre']; ?></h1>
-                        <?php
-                        // Mandar el ID de la categoría a imprimir para mostrar el catálogo
-                        echo "<a class='btn btn-info' href='imprimirCatalogo.php?id={$fila_categorias['idcategoria']}'><i class='fa fa-print'></i> Imprimir Catálogo</a>";
-                        ?>
 
-                    </div>
+
+                    <?php if (empty($_GET['q'])) { //si se ha realizado una busqueda no mostrar imprimirCatalogo y categoria
+                    ?>
+                        <div class='section-title'>
+                            <h4 class='text-primary text-uppercase' style='letter-spacing: 5px;'>Artículos principales</h4>
+                            <h1 class='display-4'><?php echo $fila_categorias['nombre']; ?></h1>
+                            <?php
+                            // Mandar el ID de la categoría a imprimir para mostrar el catálogo
+                            echo "<a class='btn btn-info' href='imprimirCatalogo.php?id={$fila_categorias['idcategoria']}'><i class='fa fa-print'></i> Imprimir Catálogo</a>";
+                            ?>
+                        </div>
+                    <?php }
+                    ?>
                     <?php
 
                     // si es el provedor solo mostrarle sus articulos
                     if ($idrol == 2) {
                         $query_articulos = "SELECT * FROM articulo WHERE idcategoria = " . $fila_categorias['idcategoria'] . " AND idprovedor = $idusuario";
                     } else {
-                        $query_articulos = "SELECT * FROM articulo WHERE idcategoria = " . $fila_categorias['idcategoria'];
+
+
+                        // si ha realizado una búsqueda, mostrar solo los artículos de la búsqueda, sino mostrar todos los artículos de la categoría
+                        if (isset($_GET['q']) && !empty($_GET['q'])) {
+                            $busqueda = $_GET['q'];
+                            // Si se ha realizado una búsqueda, filtrar los artículos según el término de búsqueda
+                            $query_articulos = "SELECT * FROM articulo WHERE idcategoria = " . $fila_categorias['idcategoria'] . " AND (nombre LIKE '%$busqueda%' OR descripcion LIKE '%$busqueda%')";
+                        } else {
+                            $query_articulos = "SELECT * FROM articulo WHERE idcategoria = " . $fila_categorias['idcategoria'];
+                        }
                     }
                     $resultado_articulos = mysqli_query($conexion, $query_articulos);
 
@@ -153,6 +177,15 @@ if (isset($_POST['agregar_carrito'])) {
                                             echo $fila_existencia['total_existencia'];
                                             ?>
                                         </p>
+                                        <?php
+
+$query = "SELECT * FROM usuario WHERE idusuario = {$fila_articulos['idprovedor']}";
+$resultado_usuario = mysqli_query($conexion, $query);
+$fila_usuario = mysqli_fetch_assoc($resultado_usuario);
+
+        ?>
+
+                                        <p>Vendedor: <?php echo $fila_usuario['nombre']; ?></p>
 
 
 
