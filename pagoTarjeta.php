@@ -86,15 +86,27 @@ if (isset($_POST['accion']) && $_POST['accion'] == 'comprar') {
     mysqli_stmt_bind_param($stmt_venta, "isdsi", $datos1['idusuario'], $fecha, $impuesto, $precio_total, $datos1['idcarrito']);
     mysqli_stmt_execute($stmt_venta);
 
-    if ($articulo['existencia'] > 0 && $datos1['cantidad'] <= $articulo['existencia']) {
-      // Actualizar la existencia del artículo en la tabla "articulo"
-      $nueva_cantidad = $articulo['existencia'] - $datos1['cantidad'];
-      $sql_actualizar_cantidad = "UPDATE articulo SET existencia = ? WHERE idarticulo = ?";
-      $stmt_actualizar_cantidad = mysqli_prepare($conexion, $sql_actualizar_cantidad);
-      mysqli_stmt_bind_param($stmt_actualizar_cantidad, "ii", $nueva_cantidad, $datos1['idarticulo']);
-      mysqli_stmt_execute($stmt_actualizar_cantidad);
+    // Consultar la existencia del artículo con la misma talla en la tabla existencia
+    $query_existencia = "SELECT existencia FROM existencia WHERE id_articulo = ? AND id_talla = ?";
+    $stmt_existencia = mysqli_prepare($conexion, $query_existencia);
+    mysqli_stmt_bind_param($stmt_existencia, "ii", $datos1['idarticulo'], $datos1['idtalla']);
+    mysqli_stmt_execute($stmt_existencia);
+    $result_existencia = mysqli_stmt_get_result($stmt_existencia);
+    $existencia = mysqli_fetch_assoc($result_existencia);
+
+    // Verificar si se encontró la existencia
+    if ($existencia) {
+      // Calcular la nueva existencia
+      $nueva_existencia = $existencia['existencia'] - $datos1['cantidad'];
+
+      // Actualizar la existencia en la tabla existencia
+      $sql_actualizar_existencia = "UPDATE existencia SET existencia = ? WHERE id_articulo = ? AND id_talla = ?";
+      $stmt_actualizar_existencia = mysqli_prepare($conexion, $sql_actualizar_existencia);
+      mysqli_stmt_bind_param($stmt_actualizar_existencia, "iii", $nueva_existencia, $datos1['idarticulo'], $datos1['idtalla']);
+      mysqli_stmt_execute($stmt_actualizar_existencia);
     } else {
-      echo "<script>alert('No hay artículos suficientes');</script>";
+      // Manejar el caso donde no se encuentra la existencia (opcional)
+      echo "No se encontró la existencia del artículo con la talla especificada.";
     }
   }
 
@@ -111,7 +123,7 @@ if (isset($_POST['accion']) && $_POST['accion'] == 'comprar') {
 
   // Redirigir al usuario a una página de confirmación de compra
   echo "<script>location.href='compras.php';</script>";
-  
+
   exit();
 }
 
@@ -171,10 +183,10 @@ if (isset($_POST['accion']) && $_POST['accion'] == 'comprar') {
         <p class="bought-items description"><?php echo $articulo['descripcion']; ?></p>
         <!-- Mostrar precio del artículo -->
         <p class="bought-items price">$<?php echo $articulo['precio_venta']; ?></p><br>
-      <?php endforeach; 
+      <?php endforeach;
 
-      
-      
+
+
       ?>
     </div>
     <br>

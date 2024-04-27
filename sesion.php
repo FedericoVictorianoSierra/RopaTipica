@@ -1,6 +1,16 @@
 <?php
 session_start(); // iniciar sesión
 
+
+// Verificar si hay una sesión activa
+if (isset($_SESSION['idusuario'])) {
+  // Hay una sesión activa, Destruir la sesión actual
+   session_destroy();
+   header("Location: sesion.php");
+  exit();
+}
+
+
 // Verificar si se ha dado al botón de iniciar sesión
 if (isset($_POST['login'])) {
   // Se incluye la conexión a la base de datos

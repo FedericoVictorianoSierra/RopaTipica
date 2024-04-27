@@ -94,20 +94,44 @@ while ($resultado = mysqli_fetch_array($registros)) {
                             <!-- Mostrar la imagen del artículo -->
                             <td><img src='<?php echo $row_imagen['nuevaImagen']; ?>' alt='imagen' width='100'></td>
                             <td><?php echo $articulo['nombre']; ?></td>
-                            <td><?php echo $articulo['existencia']; ?></td>
+
+
+                            <td>
+                                <?php
+                                // Consulta SQL para obtener la existencia del artículo con la talla correspondiente
+                                $query_existencia = "SELECT e.existencia
+                         FROM existencia e
+                         WHERE e.id_articulo = " . $articulo['idarticulo'] . " AND e.id_talla = " . $datos1['idtalla'];
+
+                                $resultado_existencia = mysqli_query($conexion, $query_existencia);
+
+                                if ($resultado_existencia) {
+                                    $fila_existencia = mysqli_fetch_assoc($resultado_existencia);
+                                    echo $fila_existencia['existencia'];
+                                } else {
+                                    echo "No disponible";
+                                }
+                                ?>
+                            </td>
+
+
                             <td><?php echo "$" . $articulo['precio_venta']; ?></td>
 
 
-                            <td><?php 
-                            
-                            $query = "SELECT * FROM talla WHERE idtalla = '{$datos1['idtalla']}'";
-                            $resultado = mysqli_query($conexion, $query);
-                            $row = mysqli_fetch_assoc($resultado);
+                            <td><?php
+
+                                $query = "SELECT * FROM talla WHERE idtalla = '{$datos1['idtalla']}'";
+                                $resultado = mysqli_query($conexion, $query);
+                                $row = mysqli_fetch_assoc($resultado);
 
 
-                            echo "" . $row['nombre'] ?></td>
+                                echo "" . $row['nombre'] ?></td>
 
                             <td><?php echo $datos1['cantidad']; ?></td>
+
+
+
+
                             <td><?php echo "$" . $precio_total; ?></td>
                             <td>
                                 <!-- Botón para eliminar el artículo del carrito -->

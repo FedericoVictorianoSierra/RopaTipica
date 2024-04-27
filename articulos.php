@@ -179,11 +179,11 @@ if (isset($_POST['agregar_carrito'])) {
                                         </p>
                                         <?php
 
-$query = "SELECT * FROM usuario WHERE idusuario = {$fila_articulos['idprovedor']}";
-$resultado_usuario = mysqli_query($conexion, $query);
-$fila_usuario = mysqli_fetch_assoc($resultado_usuario);
+                                        $query = "SELECT * FROM usuario WHERE idusuario = {$fila_articulos['idprovedor']}";
+                                        $resultado_usuario = mysqli_query($conexion, $query);
+                                        $fila_usuario = mysqli_fetch_assoc($resultado_usuario);
 
-        ?>
+                                        ?>
 
                                         <p>Vendedor: <?php echo $fila_usuario['nombre']; ?></p>
 
@@ -223,7 +223,6 @@ $fila_usuario = mysqli_fetch_assoc($resultado_usuario);
                                                 ?>
 
 
-                                                <br>
                                                 <br>
 
 
