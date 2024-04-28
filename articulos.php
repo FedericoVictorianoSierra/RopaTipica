@@ -147,7 +147,10 @@ if (isset($_POST['agregar_carrito'])) {
 
                                     <div class='col-8 col-sm-9'>
                                         <!-- Mostrar los datos del artículo actual -->
-                                        <h4><?php echo $fila_articulos['nombre']; ?></h4>
+                                        <!-- Mostrar el nombre del artículo como un enlace que redirige a detallesArticulo.php -->
+                                        <h4><a href="detallesArticulo.php?id=<?php echo $fila_articulos['idarticulo']; ?>"><?php echo $fila_articulos['nombre']; ?></a></h4>
+
+
                                         <p><?php echo $fila_articulos['descripcion']; ?></p>
 
                                         <!-- Mostrar el selector de tallas según la existencia en cada talla -->
@@ -251,7 +254,6 @@ if (isset($_POST['agregar_carrito'])) {
                                                             window.location.href = "eliminar.php?id=" + idArticulo;
                                                         } else {
                                                             // Si el usuario cancela, no hacer nada
-                                                            // Opcionalmente, puedes redirigir a la página de artículos.php aquí si lo deseas
                                                         }
                                                     }
                                                 </script>

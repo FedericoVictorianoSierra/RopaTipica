@@ -71,6 +71,10 @@ while ($resultado = mysqli_fetch_array($registros)) {
                     $total = 0; // Inicializar la variable total en cero
                     $subtotal = 0; // Inicializar la variable subtotal en cero
                     foreach ($datos as $datos1) {
+
+
+
+
                         $sql = "SELECT * FROM articulo WHERE idarticulo = " . $datos1['idarticulo'];
 
 
@@ -111,6 +115,23 @@ while ($resultado = mysqli_fetch_array($registros)) {
                                 } else {
                                     echo "No disponible";
                                 }
+
+
+                                // Verificar si la cantidad excede la existencia disponible
+                                if ($datos1['cantidad'] > $fila_existencia['existencia']) {
+                                    // Si la cantidad excede la existencia, actualizar la cantidad en el carrito
+                                    $nueva_cantidad = $fila_existencia['existencia'];
+                                    $id_carrito = $datos1['idcarrito'];
+                                    $query_actualizar_cantidad = "UPDATE carrito SET cantidad = $nueva_cantidad WHERE idcarrito = $id_carrito";
+                                    if (mysqli_query($conexion, $query_actualizar_cantidad)) {
+                                        // Actualizar la cantidad en la variable local $datos1
+                                        $datos1['cantidad'] = $nueva_cantidad;
+                                    } else {
+                                        // Manejar el error si la actualización falla
+                                        echo "Error al actualizar la cantidad en el carrito: " . mysqli_error($conexion);
+                                    }
+                                }
+
                                 ?>
                             </td>
 
@@ -126,10 +147,7 @@ while ($resultado = mysqli_fetch_array($registros)) {
 
 
                                 echo "" . $row['nombre'] ?></td>
-
                             <td><?php echo $datos1['cantidad']; ?></td>
-
-
 
 
                             <td><?php echo "$" . $precio_total; ?></td>
