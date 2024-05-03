@@ -42,7 +42,7 @@ if ($resultado_suma_cantidad) {
     <meta content="Free Website Template" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="img/Thak.png" rel="icon">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -69,7 +69,8 @@ if ($resultado_suma_cantidad) {
     <div class="container-fluid p-0 nav-bar">
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
             <a href="index.php" class="navbar-brand px-lg-4 m-0">
-                <h1 class="m-0 display-4 text-uppercase text-white">La Mixtequita</h1>
+                <!--<h1 class="m-0 display-4 text-uppercase text-white">ROPA TIPICA</h1>-->
+                <img class="w-25" src="img/Thak.png" alt="Image">
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
