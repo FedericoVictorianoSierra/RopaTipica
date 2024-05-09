@@ -14,8 +14,14 @@ $result_categoria = mysqli_query($conexion, $sql_categoria);
 $row_categoria = mysqli_fetch_assoc($result_categoria);
 
 // Consultar los artículos de la categoría específica
-$sql_articulos = "SELECT * FROM articulo WHERE idcategoria = $id_categoria";
+$sql_articulos = "SELECT a.*, t.nombre AS talla_nombre, e.existencia 
+                  FROM articulo a 
+                  INNER JOIN existencia e ON a.idarticulo = e.id_articulo 
+                  INNER JOIN talla t ON e.id_talla = t.idtalla
+                  WHERE a.idcategoria = $id_categoria";
 $result_articulos = mysqli_query($conexion, $sql_articulos);
+
+
 ?>
 
 <style>
@@ -90,7 +96,7 @@ $result_articulos = mysqli_query($conexion, $sql_articulos);
     }
 </style>
 
-
+<img height="10%" width="10%" src="img/Thak.png" alt="Image">
 <!-- Contenido del catalogo -->
 <div class="catalogo">
     <!-- Encabezado donde se muetra la categoria del catalogo-->
@@ -139,7 +145,7 @@ $result_articulos = mysqli_query($conexion, $sql_articulos);
     document.addEventListener("DOMContentLoaded", () => {
         window.print(); // Imprimir el catalogo
         setTimeout(() => {
-            window.location.href = "./categoria.php"; // Redireccionar a la página de compras después de un segundo
+            window.location.href = "./articulos.php"; // Redireccionar a la página de compras después de un segundo
         }, 1000);
     });
 </script>

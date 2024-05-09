@@ -84,7 +84,9 @@ $result_tickets = mysqli_query($conexion, $sql_tickets);
         }
     }
 </style>
+<img height="10%" width="10%" src="img/Thak.png" alt="Image">
 <div class="ticket">
+
     <!-- Encabezado del ticket -->
     <p class="centrado">TICKET DE VENTA
         <br><?php echo $row['fecha']; ?>

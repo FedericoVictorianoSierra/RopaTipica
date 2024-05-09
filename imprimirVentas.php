@@ -26,6 +26,7 @@ $result = mysqli_query($conexion, $sql);
 </head>
 
 <body>
+<img height="10%" width="10%" src="img/Thak.png" alt="Image">
     <div class="ticket">
         <h1 class="centrado">VENTAS</h1>
         <table>
