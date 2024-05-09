@@ -127,7 +127,7 @@ $result_articulos = mysqli_query($conexion, $sql_articulos);
                     <td class="precio"><?php echo $row_articulo['precio_venta']; ?> <strong></strong></td>
                     <td class="precio"><?php echo $row_articulo['existencia']; ?></td>
                     <td class="nombre"><?php echo $row_articulo['descripcion']; ?></td>
-                    <td class="precio"><?php echo $row_articulo['talla']; ?></td>
+                    <td class="precio"><?php echo $row_articulo['talla_nombre']; ?></td>
                     <td class="precio"><?php echo $row_articulo['modelo']; ?></td>
                 </tr>
             <?php

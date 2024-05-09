@@ -48,7 +48,6 @@ if (isset($_POST['crear'])) {
     $codigo = $_POST['codigo'];
     $nombre = $_POST['nombre'];
     $precio_venta = $_POST['precio_venta'];
-    $existencia = $_POST['existencia'];
     $descripcion = $_POST['descripcion'];
     $modelo = $_POST['modelo'];
     $imagen = $_POST['foto_'];
@@ -61,7 +60,7 @@ if (isset($_POST['crear'])) {
     $idimagen = mysqli_insert_id($conexion);
 
      // Insertar los datos en la tabla articulo
-     $sql = "INSERT INTO articulo (idcategoria, codigo, nombre, precio_venta, existencia, descripcion, modelo, id_imagen, idprovedor) VALUES ('$idcategoria', '$codigo', '$nombre', '$precio_venta', '$existencia', '$descripcion', '$modelo', '$idimagen','$idusuario')";
+     $sql = "INSERT INTO articulo (idcategoria, codigo, nombre, precio_venta, descripcion, modelo, id_imagen, idprovedor) VALUES ('$idcategoria', '$codigo', '$nombre', '$precio_venta', '$descripcion', '$modelo', '$idimagen','$idusuario')";
     
      // Ejecutar la consulta para insertar el artículo
      if (mysqli_query($conexion, $sql)) {
@@ -120,9 +119,6 @@ if (isset($_POST['crear'])) {
             <br>
             <label for="precio_venta">Precio de venta:</label>
             <input class="px-4 me-sm-3" minlength="8" maxlength="25" type="number" name="precio_venta" id="precio_venta" required="required">
-            <br>
-            <label for="existencia">Existencia:</label>
-            <input class="px-4 me-sm-3" minlength="8" maxlength="25" type="number" name="existencia" id="existencia" required="required">
             <br>
             <label for="descripcion">Descripción:</label>
             <textarea class="px-4 me-sm-3" name="descripcion" id="descripcion" required="required"></textarea>
