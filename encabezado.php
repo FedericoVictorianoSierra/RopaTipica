@@ -89,6 +89,7 @@ if ($resultado_suma_cantidad) {
                         <a href="ventas.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'ventas.php') ? 'active' : ''; ?>">VENDIDO</a>
                     <?php } ?>
                     <a href="perfil.php" class="nav-item nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'perfil.php') ? 'active' : ''; ?>">PERFIL</a>
+                    <a href="ayuda.php" class="nav-item nav-link">AYUDA</a>
                     <a href="cerrarsesion.php" class="nav-item nav-link">CERRAR SESIÓN</a>
                 </div>
             </div>

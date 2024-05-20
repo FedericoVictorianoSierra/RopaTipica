@@ -42,6 +42,32 @@ if (isset($_SESSION['idusuario'])) {
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.min.css" rel="stylesheet">
     <link href="css/cookies.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            text-align: center;
+        }
+        .pdf-container {
+            margin: 20px 0;
+            width: 100%;
+            max-width: 800px;
+        }
+        .pdf-title {
+            margin: 10px 0;
+            text-align: center;
+        }
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 
 <body>
@@ -57,7 +83,7 @@ if (isset($_SESSION['idusuario'])) {
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-4">
-                    <a href="index.php" class="nav-item nav-link active">INICIO</a>
+                    <a href="index.php" class="nav-item nav-link">INICIO</a>
                     <a href="categoria.php" class="nav-item nav-link">CATEGORÍA</a>
                     <a href="articulos.php" class="nav-item nav-link">ARTÍCULOS</a>
 
@@ -74,7 +100,7 @@ if (isset($_SESSION['idusuario'])) {
                     <?php } ?>
 
                     <a href="perfil.php" class="nav-item nav-link">PERFIL</a>
-                    <a href="ayuda.php" class="nav-item nav-link">AYUDA</a>
+                    <a href="ayuda.php" class="nav-item nav-link active">AYUDA</a>
 
                     <?php
                     if (!isset($_SESSION['idusuario'])) {
@@ -111,21 +137,8 @@ if (isset($_SESSION['idusuario'])) {
                 <div class="carousel-item active">
                     <img class="w-100" src="img/Tlaxiaco.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <h2 class="text-primary font-weight-medium m-0">VISTE LA TRADICIÓN</h2>
-                        <h1 class="display-1 text-white m-0">LA MIXTEQUITA</h1>
-                        <h2 class="text-white m-0">CONECTA CON LA CULTURA</h2>
+                        <h1 class="display-1 text-white m-0">AYUDA</h1>
                     </div>
-                </div>
-
-                <div class="carousel-item ">
-                    <img class="w-100" src="img/putla.jpg" alt="Image">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <h2 class="text-primary font-weight-medium m-0">UNIENDO MANOS</h2>
-                        <h1 class="display-1 text-white m-0">LA MIXTEQUITA</h1>
-                        <h2 class="text-white m-0">TEJIENDO TRADICIONES</h2>
-                    </div>
-
-
                 </div>
             </div>
             <a class="carousel-control-prev" href="#blog-carousel" data-slide="prev">
@@ -141,92 +154,21 @@ if (isset($_SESSION['idusuario'])) {
     </div>
     <!-- Carousel End -->
 
-
-    <!-- About Start -->
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="section-title">
-                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">LA MIXTEQUITA</h4>
-                <h1 class="display-4">UNIENDO MANOS</h1>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 py-0 py-lg-5">
-                    <h1 class="mb-3">RAÍCES Y CORAZÓN</h1>
-                    <h5 class="mb-3">Conoce un poco de tu consumo</h5>
-                    <p>Haz clic en 'Comprar ahora' para adquirir estas piezas únicas de la Mixteca Oaxaqueña y contribuir al crecimiento y desarrollo de las comunidades artesanales locales.</p>
-                    <a href="articulos.php" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">COMPRAR AHORA</a>
-                </div>
-                <div class="col-lg-4 py-5 py-lg-0" style="min-height: 500px;">
-                    <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100" src="img/about.jpg" style="object-fit: cover;">
-                    </div>
-                </div>
-
-                <div class="col-lg-4 py-0 py-lg-5">
-                    <h1 class="mb-3">MODA CON ALMA Y CORAZÓN</h1>
-                    <p> Dirígete al carrito para completar tu compra y apoyar a los talentosos artesanos de la Mixteca Oaxaqueña.</p>
-
-                    <?php
-                    if ($idrol == 1) { ?>
-                        <a href="carrito.php" class="btn btn-primary font-weight-bold py-2 px-4 mt-2">CARRITO</a>
-                    <?php  } ?>
-                    
-                </div>
-
-            </div>
+    <h1>Visualización de PDFs</h1>
+    
+    <div class="pdf-container">
+        <div class="pdf-title">
+            <h2>Manual de Usuario</h2>
         </div>
+        <iframe src="pdf/manual_de_usuario.pdf" type="application/pdf"></iframe>
     </div>
-    <!-- About End -->
 
-
-
-
-    <!-- Offer Start -->
-    <div class="offer container-fluid my-5 py-5 text-center position-relative overlay-top overlay-bottom">
-        <div class="container py-5">
-            <h1 class="display-3 text-primary mt-3">Bienvenido</h1>
-            <h1 class="text-white mb-3">LA MIXTEQUITA</h1>
-            <h4 class="text-white font-weight-normal mb-4 pb-3">http://ropatipica.rf.gd/</h4>
-            <!-- <form class="form-inline justify-content-center mb-4"> -->
-            <!-- <div class="input-group">
-                    <input type="text" class="form-control p-4" placeholder="Your Email" style="height: 30px;"> -->
-            <!-- <div class="input-group-append">
-                        <button class="btn btn-primary font-weight-bold px-4" type="submit">Sign Up</button>
-                    </div> -->
+    <div class="pdf-container">
+        <div class="pdf-title">
+            <h2>Manual de Proveedor</h2>
         </div>
-        </form>
+        <iframe src="pdf/manual_de_proveedor.pdf" type="application/pdf"></iframe>
     </div>
-    </div>
-    <!-- Offer End -->
-
-
-
-
-    <!-- Footer Start -->
-    <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
-        <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">INFORMACIÓN</h4>
-                <p><i class="fa fa-map-marker-alt mr-2"></i>#23 DE CALLE ALDAMA TLAXIACO.OAXACA</p>
-                <p><i class="fa fa-phone-alt mr-2"></i>953-975-6822</p>
-                <p class="m-0"><i class="fa fa-envelope mr-2"></i>MIXTEQUITA@gmail.com</p>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">HORARIO DE ATENCION</h4>
-                <div>
-                    <h6 class="text-white text-uppercase">LUNES - VIERNES</h6>
-                    <p>8.00 AM - 8.00 PM</p>
-                    <h6 class="text-white text-uppercase">SABADO - DOMINGO</h6>
-                    <p>2.00 PM - 8.00 PM</p>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
-            <p class="mb-2 text-white">LA MIXTEQUITA &copy; <a class="font-weight-bold" href="#">COM</a>BORDADOS DEL CORAZON</a></p>
-            <p class="m-0 text-white">EL BORDADO QUE NECESITAS <a class="font-weight-bold" href="#">LA MIXTEQUITA.COM</a></p>
-        </div>
-    </div>
-    <!-- Footer End -->
 
 
 
